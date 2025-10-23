@@ -43,9 +43,30 @@
 				#experience .spotlight .content .actions { margin: 0; }
 				#experience .spotlight .content .tech-list { margin: 0; }
 
-				/* In-row expandable details under each internship with smooth CSS animation */
-				#experience .spotlight-details { display: block; max-height: 0; overflow: hidden; opacity: 0; padding: 0 4em 0 4em; background: rgba(255, 255, 255, 0.04); transition: max-height 220ms ease, opacity 220ms ease, padding 220ms ease; }
-				#experience .spotlight-details.open { max-height: 1200px; opacity: 1; padding: 1.25em 4em 2em 4em; }
+			/* In-row expandable details - GPU accelerated with grid */
+			#experience .spotlight-details { 
+				display: grid;
+				grid-template-rows: 0fr;
+				transition: grid-template-rows 300ms ease-out;
+				background: rgba(255, 255, 255, 0.04);
+			}
+			#experience .spotlight-details.open { 
+				grid-template-rows: 1fr;
+			}
+			#experience .spotlight-details > .details-inner {
+				overflow: hidden;
+			}
+			#experience .spotlight-details > .details-inner > .details-content {
+				padding: 0 4em;
+				opacity: 0;
+				transform: translateY(-10px);
+				transition: opacity 250ms ease-out 50ms, transform 250ms ease-out 50ms;
+			}
+			#experience .spotlight-details.open > .details-inner > .details-content {
+				padding: 1.25em 4em 2em 4em;
+				opacity: 1;
+				transform: translateY(0);
+			}
 				#experience .spotlight-details p { margin: 0 0 0.75em 0; }
 				#experience .spotlight .actions a.button .chev { transition: transform 200ms ease; display: inline-block; line-height: 1; }
 				#experience .spotlight .actions a.button[aria-expanded="true"] .chev { transform: rotate(180deg); }
@@ -353,10 +374,14 @@
 								</ul>
 							</div>
 						</section>
-						<div id="details-newmark" class="spotlight-details" role="region" aria-hidden="true" aria-label="Newmark details">
-							<p>At Newmark, I worked as a Software Engineering Intern, building full-stack applications that enhanced analytics and decision-making for the commercial real estate division. I developed a responsive Stacking Plan using React, TypeScript, and Databricks to process over 10,000 leasing records into tenant KPIs and interactive floor plans, helping analysts and asset managers make faster, data-driven portfolio decisions.</p>
-							<p>I also built a Deal Pipeline Kanban with @dnd-kit and React Query to enable leadership to track over $50 million in active deals with real-time insights into deal flow and performance. Additionally, I created a GIS Dashboard with Zod and FastAPI automation that streamlined geospatial report requests and reduced manual work for the operations team.</p>
+					<div id="details-newmark" class="spotlight-details" role="region" aria-hidden="true" aria-label="Newmark details">
+						<div class="details-inner">
+							<div class="details-content">
+								<p>At Newmark, I worked as a Software Engineering Intern, building full-stack applications that enhanced analytics and decision-making for the commercial real estate division. I developed a responsive Stacking Plan using React, TypeScript, and Databricks to process over 10,000 leasing records into tenant KPIs and interactive floor plans, helping analysts and asset managers make faster, data-driven portfolio decisions.</p>
+								<p>I also built a Deal Pipeline Kanban with @dnd-kit and React Query to enable leadership to track over $50 million in active deals with real-time insights into deal flow and performance. Additionally, I created a GIS Dashboard with Zod and FastAPI automation that streamlined geospatial report requests and reduced manual work for the operations team.</p>
+							</div>
 						</div>
+					</div>
 						<section class="spotlight">
 							<div class="image"><img src="/assets/pic02-BccxCaXZ.jpg" alt="Ubiq" /></div><div class="content">
 						<h2>
@@ -376,10 +401,14 @@
 								</ul>
 							</div>
 						</section>
-						<div id="details-ubiq" class="spotlight-details" role="region" aria-hidden="true" aria-label="Ubiq details">
-							<p>At Ubiq, I worked as a Product Management Intern where I focused on improving user experience and overall product performance. I led user research by conducting over 60 customer interviews and turned those insights into five key UX improvements that directly enhanced usability and engagement.</p>
-							<p>I also executed full-cycle product testing, identifying more than 50 bugs and collaborating with engineers to resolve four critical issues affecting core functionality. Additionally, I managed an agile backlog of 350+ features, UI enhancements, and bug fixes in Jira, prioritizing development based on user needs and business impact.</p>
+					<div id="details-ubiq" class="spotlight-details" role="region" aria-hidden="true" aria-label="Ubiq details">
+						<div class="details-inner">
+							<div class="details-content">
+								<p>At Ubiq, I worked as a Product Management Intern where I focused on improving user experience and overall product performance. I led user research by conducting over 60 customer interviews and turned those insights into five key UX improvements that directly enhanced usability and engagement.</p>
+								<p>I also executed full-cycle product testing, identifying more than 50 bugs and collaborating with engineers to resolve four critical issues affecting core functionality. Additionally, I managed an agile backlog of 350+ features, UI enhancements, and bug fixes in Jira, prioritizing development based on user needs and business impact.</p>
+							</div>
 						</div>
+					</div>
 						<section class="spotlight">
 							<div class="image"><img src="/assets/pic03-B5O6fO34.jpg" alt="Everise" /></div><div class="content">
 						<h2>
@@ -400,10 +429,14 @@
 								</ul>
 							</div>
 						</section>
-						<div id="details-everise" class="spotlight-details" role="region" aria-hidden="true" aria-label="Everise details">
-							<p>At Everise, I worked as a Data Analyst Intern where I automated large-scale data workflows and improved analytics for business and finance teams. Using Apache Airflow, I built ETL pipelines that integrated over 500,000 data points from multiple sources into a centralized SQL Server warehouse, enabling real-time Power BI dashboards that leadership used for performance monitoring and decision-making.</p>
-							<p>I analyzed customer service KPIs across 100,000+ user interactions using SQL, Python, and DAX to identify peak-hour call surges and escalation delays, leading to process changes that raised customer satisfaction by 7%. I also developed ARIMA-based predictive models in Python with 92% forecast accuracy on billing data, helping finance teams anticipate fluctuations in a $20 million annual Bill-to-Pay cycle and reduce billing risks.</p>
+					<div id="details-everise" class="spotlight-details" role="region" aria-hidden="true" aria-label="Everise details">
+						<div class="details-inner">
+							<div class="details-content">
+								<p>At Everise, I worked as a Data Analyst Intern where I automated large-scale data workflows and improved analytics for business and finance teams. Using Apache Airflow, I built ETL pipelines that integrated over 500,000 data points from multiple sources into a centralized SQL Server warehouse, enabling real-time Power BI dashboards that leadership used for performance monitoring and decision-making.</p>
+								<p>I analyzed customer service KPIs across 100,000+ user interactions using SQL, Python, and DAX to identify peak-hour call surges and escalation delays, leading to process changes that raised customer satisfaction by 7%. I also developed ARIMA-based predictive models in Python with 92% forecast accuracy on billing data, helping finance teams anticipate fluctuations in a $20 million annual Bill-to-Pay cycle and reduce billing risks.</p>
+							</div>
 						</div>
+					</div>
 						<section class="spotlight">
 							<div class="image"><img src="/assets/pic04-Bsr_9ihV.jpg" alt="eMeasurematics" /></div><div class="content">
 						<h2>
@@ -423,10 +456,14 @@
 								</ul>
 							</div>
 						</section>
-						<div id="details-emeasurematics" class="spotlight-details" role="region" aria-hidden="true" aria-label="eMeasurematics details">
-							<p>At eMeasurematics, I worked as a Data Science and Machine Learning Intern, developing predictive maintenance systems and data dashboards for industrial automation. I built a Flask web application for Kress industrial vehicles that integrated historical and user-entered data through SQLAlchemy and deployed a Random Forest model achieving 85% accuracy in predicting equipment failures. This helped maintenance teams prevent downtime and plan repairs proactively.</p>
-							<p>I also created a Tableau dashboard connected to a MySQL database to analyze over 50,000 sensor logs and optimize maintenance scheduling across facilities. In addition, I configured, calibrated, and updated firmware on 16 radar sensors to ensure precise slab positioning for four major steel facility cranes, improving operational accuracy and system reliability.</p>
+					<div id="details-emeasurematics" class="spotlight-details" role="region" aria-hidden="true" aria-label="eMeasurematics details">
+						<div class="details-inner">
+							<div class="details-content">
+								<p>At eMeasurematics, I worked as a Data Science and Machine Learning Intern, developing predictive maintenance systems and data dashboards for industrial automation. I built a Flask web application for Kress industrial vehicles that integrated historical and user-entered data through SQLAlchemy and deployed a Random Forest model achieving 85% accuracy in predicting equipment failures. This helped maintenance teams prevent downtime and plan repairs proactively.</p>
+								<p>I also created a Tableau dashboard connected to a MySQL database to analyze over 50,000 sensor logs and optimize maintenance scheduling across facilities. In addition, I configured, calibrated, and updated firmware on 16 radar sensors to ensure precise slab positioning for four major steel facility cranes, improving operational accuracy and system reliability.</p>
+							</div>
 						</div>
+					</div>
 					</section>
 
 				<!-- Projects Banner -->
@@ -689,71 +726,49 @@
 			</script>
 			<script>
 				(function(){
-					// Check if jQuery is available and working
-					var jQueryAvailable = typeof jQuery !== 'undefined' && typeof jQuery.fn.slideDown === 'function';
-					
-					if (jQueryAvailable) {
-						// Use jQuery for smooth animations
-						jQuery(function($){
-							$('#experience .spotlight .actions a.button').on('click', function(e){
-								e.preventDefault();
-								e.stopPropagation();
-								var $btn = $(this);
-								var targetId = $btn.attr('aria-controls');
-								var $details = $('#' + targetId);
-								var isOpen = $btn.attr('aria-expanded') === 'true';
+					// Clean GPU-accelerated accordion with CSS Grid
+					document.addEventListener('click', function(e){
+						var btn = e.target.closest('#experience .spotlight .actions a.button.details');
+						if (!btn) return;
+						e.preventDefault();
+						e.stopPropagation();
+						
+						var targetId = btn.getAttribute('aria-controls');
+						var details = document.getElementById(targetId);
+						if (!details) return;
+						
+						var isOpen = btn.getAttribute('aria-expanded') === 'true';
 
-								// Close others
-								$('#experience .spotlight .actions a.button[aria-expanded="true"]').each(function(){
-									$(this).attr('aria-expanded', 'false').find('.label').text('View Details');
-								});
-								$('#experience .spotlight-details:visible').not($details).slideUp(200).attr('aria-hidden', 'true').removeClass('open');
-
-								if (isOpen) {
-									$btn.attr('aria-expanded', 'false').find('.label').text('View Details');
-									$details.removeClass('open').stop(true, true).slideUp(200).attr('aria-hidden', 'true');
-								} else {
-									$btn.attr('aria-expanded', 'true').find('.label').text('Hide Details');
-									$details.addClass('open').stop(true, true).slideDown(200).attr('aria-hidden', 'false');
-								}
-							});
-						});
-					} else {
-						// Fallback to vanilla JS with CSS transitions
-						document.addEventListener('click', function(e){
-							var btn = e.target.closest('#experience .spotlight .actions a.button.details');
-							if (!btn) return;
-							e.preventDefault();
-							e.stopPropagation();
-							var targetId = btn.getAttribute('aria-controls');
-							var details = document.getElementById(targetId);
-							if (!details) return;
-							var isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-							// close others
-							document.querySelectorAll('#experience .spotlight .actions a.button.details[aria-expanded="true"]').forEach(function(other){
-								if (other !== btn) {
-									other.setAttribute('aria-expanded','false');
-									var lbl = other.querySelector('.label'); if (lbl) lbl.textContent = 'View Details';
-								}
-							});
-							document.querySelectorAll('#experience .spotlight-details').forEach(function(el){
-								if (el !== details) { el.classList.remove('open'); el.setAttribute('aria-hidden','true'); }
-							});
-
-							if (isOpen) {
-								btn.setAttribute('aria-expanded','false');
-								var lbl1 = btn.querySelector('.label'); if (lbl1) lbl1.textContent = 'View Details';
-								details.classList.remove('open');
-								details.setAttribute('aria-hidden','true');
-							} else {
-								btn.setAttribute('aria-expanded','true');
-								var lbl2 = btn.querySelector('.label'); if (lbl2) lbl2.textContent = 'Hide Details';
-								details.classList.add('open');
-								details.setAttribute('aria-hidden','false');
+						// Close all others
+						document.querySelectorAll('#experience .spotlight .actions a.button.details').forEach(function(other){
+							if (other !== btn) {
+								other.setAttribute('aria-expanded','false');
+								var lbl = other.querySelector('.label'); 
+								if (lbl) lbl.textContent = 'View Details';
 							}
 						});
-					}
+						document.querySelectorAll('#experience .spotlight-details').forEach(function(el){
+							if (el !== details) { 
+								el.classList.remove('open'); 
+								el.setAttribute('aria-hidden','true'); 
+							}
+						});
+
+						// Toggle current
+						if (isOpen) {
+							btn.setAttribute('aria-expanded','false');
+							var lbl1 = btn.querySelector('.label'); 
+							if (lbl1) lbl1.textContent = 'View Details';
+							details.classList.remove('open');
+							details.setAttribute('aria-hidden','true');
+						} else {
+							btn.setAttribute('aria-expanded','true');
+							var lbl2 = btn.querySelector('.label'); 
+							if (lbl2) lbl2.textContent = 'Hide Details';
+							details.classList.add('open');
+							details.setAttribute('aria-hidden','false');
+						}
+					});
 
 					// Menu toggle (works with or without jQuery)
 					document.addEventListener('click', function(e){
