@@ -106,10 +106,10 @@
 				#experience .spotlight .content .actions { justify-content: center; margin-left: 0; }
 				#experience .spotlight .content .tech-list { justify-content: center; }
 			}
-			
-			/* Mobile button fixes - prevent text overflow */
+
+			/* Mobile phone button fixes - responsive sizing for all buttons */
 			@media screen and (max-width: 736px) {
-				/* Fix all buttons to have proper sizing on mobile */
+				/* Global button sizing on mobile */
 				input[type="submit"],
 				input[type="reset"],
 				input[type="button"],
@@ -121,7 +121,7 @@
 					min-height: 2.75em;
 				}
 				
-				/* View Details button specific fixes */
+				/* View Details button - compact on mobile */
 				#experience .spotlight .actions a.button.details {
 					font-size: 0.65rem !important;
 					padding: 0.5em 0.65em 0.5em 0.85em !important;
@@ -134,19 +134,21 @@
 					font-size: 0.85em;
 				}
 				
-				/* Banner buttons */
+				/* Banner buttons (LinkedIn, Resume, etc.) */
 				#banner .actions .button,
 				#experience-banner .actions .button,
-				#projects-banner .actions .button {
+				#projects-banner .actions .button,
+				#contact .actions .button {
 					font-size: 0.7rem !important;
 					padding: 0 1.5em !important;
 				}
 				
-				/* Ensure content padding is smaller on mobile */
+				/* Reduce content padding on mobile */
 				#experience .spotlight .content { 
 					padding: 1.5em 1.5em 1em 1.5em !important; 
 				}
 				
+				/* Details section padding on mobile */
 				#experience .spotlight-details > .details-inner > .details-content {
 					padding: 0 1.5em !important;
 				}
@@ -155,8 +157,8 @@
 					padding: 1em 1.5em 1.5em 1.5em !important;
 				}
 			}
-			
-			/* Experience Banner - Perfect Centering */
+		
+		/* Experience Banner - Perfect Centering */
 			#experience-banner {
 				display: flex;
 				flex-direction: column;
