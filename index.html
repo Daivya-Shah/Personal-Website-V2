@@ -149,22 +149,25 @@
 				flex-shrink: 0;
 			}
 			
-		/* Banner buttons (LinkedIn, Resume, etc.) - compact and centered */
+		/* Banner buttons (LinkedIn, Resume, etc.) - side by side */
 		#banner .actions,
 		#experience-banner .actions,
 		#projects-banner .actions,
 		#contact .actions {
 			display: flex !important;
+			flex-direction: row !important;
 			justify-content: center !important;
 			align-items: center !important;
 			gap: 0.75em !important;
+			flex-wrap: nowrap !important;
 		}
 		
 		#banner .actions li,
 		#experience-banner .actions li,
 		#projects-banner .actions li,
 		#contact .actions li {
-			flex: 0 0 auto !important;
+			display: inline-block !important;
+			margin: 0 !important;
 		}
 		
 		#banner .actions .button,
@@ -173,12 +176,11 @@
 		#contact .actions .button {
 			font-size: 0.7rem !important;
 			padding: 0 1.5em !important;
-			width: auto !important;
+			white-space: nowrap !important;
 			display: inline-block !important;
-			max-width: fit-content !important;
 		}
-			
-			/* Reduce content padding on mobile */
+		
+		/* Reduce content padding on mobile */
 			#experience .spotlight .content { 
 				padding: 1.5em 1.5em 1em 1.5em !important; 
 			}
