@@ -46,7 +46,7 @@
 
 				/* In-row expandable details under each internship with smooth CSS animation */
 				#experience .spotlight-details { display: block; max-height: 0; overflow: hidden; opacity: 0; padding: 0 4em 0 4em; background: rgba(255, 255, 255, 0.04); transition: max-height 220ms ease, opacity 220ms ease, padding 220ms ease; }
-				#experience .spotlight-details.open { max-height: 1200px; opacity: 1; padding: 1.25em 4em 2em 4em; }
+				#experience .spotlight-details.open { opacity: 1; padding: 1.25em 4em 2em 4em; }
 				#experience .spotlight-details p { margin: 0 0 0.75em 0; }
 				#experience .spotlight .actions a.button .chev { transition: transform 200ms ease; display: inline-block; line-height: 1; }
 				#experience .spotlight .actions a.button[aria-expanded="true"] .chev { transform: rotate(180deg); }
@@ -701,14 +701,22 @@
 							$('#experience .spotlight .actions a.button[aria-expanded="true"]').each(function(){
 								$(this).attr('aria-expanded', 'false').find('.label').text('View Details');
 							});
-							$('#experience .spotlight-details:visible').not($details).slideUp(200).attr('aria-hidden', 'true');
+							$('#experience .spotlight-details').not($details).each(function(){
+								this.style.maxHeight = '0px';
+								this.classList.remove('open');
+								this.setAttribute('aria-hidden','true');
+							});
 
 							if (isOpen) {
 							$btn.attr('aria-expanded', 'false').find('.label').text('View Details');
-							$details.removeClass('open').stop(true, true).slideUp(200).attr('aria-hidden', 'true');
+							$details.removeClass('open');
+							$details[0].style.maxHeight = '0px';
+							$details.attr('aria-hidden', 'true');
 							} else {
 							$btn.attr('aria-expanded', 'true').find('.label').text('Hide Details');
-							$details.addClass('open').stop(true, true).slideDown(200).attr('aria-hidden', 'false');
+							$details.addClass('open');
+							$details[0].style.maxHeight = $details[0].scrollHeight + 'px';
+							$details.attr('aria-hidden', 'false');
 							}
 						});
 					});
@@ -734,50 +742,54 @@
 								var lbl = other.querySelector('.label'); if (lbl) lbl.textContent = 'View Details';
 							}
 						});
-						document.querySelectorAll('#experience .spotlight-details').forEach(function(el){
-							if (el !== details) { el.classList.remove('open'); el.setAttribute('aria-hidden','true'); }
-						});
+                        document.querySelectorAll('#experience .spotlight-details').forEach(function(el){
+                            if (el !== details) { el.classList.remove('open'); el.style.maxHeight = '0px'; el.setAttribute('aria-hidden','true'); }
+                        });
 
 						if (isOpen) {
 							btn.setAttribute('aria-expanded','false');
 							var lbl1 = btn.querySelector('.label'); if (lbl1) lbl1.textContent = 'View Details';
-							details.classList.remove('open');
-							details.setAttribute('aria-hidden','true');
+                            details.classList.remove('open');
+                            details.style.maxHeight = '0px';
+                            details.setAttribute('aria-hidden','true');
 						} else {
 							btn.setAttribute('aria-expanded','true');
 							var lbl2 = btn.querySelector('.label'); if (lbl2) lbl2.textContent = 'Hide Details';
-							details.classList.add('open');
-							details.setAttribute('aria-hidden','false');
+                            details.classList.add('open');
+                            details.style.maxHeight = details.scrollHeight + 'px';
+                            details.setAttribute('aria-hidden','false');
 						}
 					});
 
-					// Menu toggle fallback
-					document.addEventListener('click', function(e){
-						var link = e.target.closest('a[href="#menu"]');
-						if (link) {
-							e.preventDefault();
-							document.body.classList.toggle('is-menu-visible');
-						}
-						var close = e.target.closest('#menu .close');
-						if (close) {
-							e.preventDefault();
-							document.body.classList.remove('is-menu-visible');
-						}
-					});
+                    // Menu toggle fallback (only if jQuery panel plugin isn't available)
+                    if (!(window.jQuery && jQuery.fn && jQuery.fn.panel)) {
+                        document.addEventListener('click', function(e){
+                            var link = e.target.closest('a[href="#menu"]');
+                            if (link) {
+                                e.preventDefault();
+                                document.body.classList.toggle('is-menu-visible');
+                            }
+                            var close = e.target.closest('#menu .close');
+                            if (close) {
+                                e.preventDefault();
+                                document.body.classList.remove('is-menu-visible');
+                            }
+                        });
 
-					// Close menu after clicking any in-menu link; smooth scroll fallback
-					document.getElementById('menu')?.addEventListener('click', function(e){
-						var a = e.target.closest('a[href^="#"]');
-						if (!a) return;
-						var href = a.getAttribute('href');
-						if (!href || href === '#') return;
-						var target = document.querySelector(href);
-						if (target) {
-							e.preventDefault();
-							document.body.classList.remove('is-menu-visible');
-							target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-						}
-					});
+                        // Close menu after clicking any in-menu link; smooth scroll fallback
+                        document.getElementById('menu')?.addEventListener('click', function(e){
+                            var a = e.target.closest('a[href^="#"]');
+                            if (!a) return;
+                            var href = a.getAttribute('href');
+                            if (!href || href === '#') return;
+                            var target = document.querySelector(href);
+                            if (target) {
+                                e.preventDefault();
+                                document.body.classList.remove('is-menu-visible');
+                                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        });
+                    }
 					// Hide menu on ESC
 					document.addEventListener('keydown', function(e){
 						if (e.key === 'Escape') document.body.classList.remove('is-menu-visible');
