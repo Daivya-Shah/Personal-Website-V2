@@ -149,14 +149,34 @@
 				flex-shrink: 0;
 			}
 			
-			/* Banner buttons (LinkedIn, Resume, etc.) */
-			#banner .actions .button,
-			#experience-banner .actions .button,
-			#projects-banner .actions .button,
-			#contact .actions .button {
-				font-size: 0.7rem !important;
-				padding: 0 1.5em !important;
-			}
+		/* Banner buttons (LinkedIn, Resume, etc.) - compact and centered */
+		#banner .actions,
+		#experience-banner .actions,
+		#projects-banner .actions,
+		#contact .actions {
+			display: flex !important;
+			justify-content: center !important;
+			align-items: center !important;
+			gap: 0.75em !important;
+		}
+		
+		#banner .actions li,
+		#experience-banner .actions li,
+		#projects-banner .actions li,
+		#contact .actions li {
+			flex: 0 0 auto !important;
+		}
+		
+		#banner .actions .button,
+		#experience-banner .actions .button,
+		#projects-banner .actions .button,
+		#contact .actions .button {
+			font-size: 0.7rem !important;
+			padding: 0 1.5em !important;
+			width: auto !important;
+			display: inline-block !important;
+			max-width: fit-content !important;
+		}
 			
 			/* Reduce content padding on mobile */
 			#experience .spotlight .content { 
