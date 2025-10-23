@@ -97,14 +97,63 @@
 				#experience > section.spotlight:nth-of-type(3) { background-color: rgba(0, 0, 0, 0.225); }
 				#experience > section.spotlight:nth-of-type(4) { background-color: rgba(0, 0, 0, 0.3); }
 
-				/* On mobile, allow natural height so content stacks without clipping */
-				@media screen and (max-width: 980px) {
-					#experience .spotlight { height: auto; }
-					#experience .spotlight .content { padding: 2em 3em 1.5em 3em; }
-					/* Center actions and techs on tablet/mobile */
-					#experience .spotlight .content .actions { justify-content: center; margin-left: 0; }
-					#experience .spotlight .content .tech-list { justify-content: center; }
+			/* On mobile, allow natural height so content stacks without clipping */
+			@media screen and (max-width: 980px) {
+				#experience .spotlight { height: auto; }
+				#experience .spotlight .content { padding: 2em 3em 1.5em 3em; }
+				/* Center actions and techs on tablet/mobile */
+				#experience .spotlight .content .actions { justify-content: center; margin-left: 0; }
+				#experience .spotlight .content .tech-list { justify-content: center; }
+			}
+			
+			/* Mobile button fixes - prevent text overflow */
+			@media screen and (max-width: 736px) {
+				/* Fix all buttons to have proper sizing on mobile */
+				input[type="submit"],
+				input[type="reset"],
+				input[type="button"],
+				button,
+				.button {
+					font-size: 0.7rem !important;
+					padding: 0 1.5em !important;
+					white-space: nowrap;
+					min-height: 2.75em;
 				}
+				
+				/* View Details button specific fixes */
+				#experience .spotlight .actions a.button.details {
+					font-size: 0.65rem !important;
+					padding: 0.5em 0.65em 0.5em 0.85em !important;
+					gap: 0.5em;
+				}
+				
+				#experience .spotlight .actions a.button.details .chip {
+					width: 1.6em;
+					height: 1.6em;
+					font-size: 0.85em;
+				}
+				
+				/* Banner buttons */
+				#banner .actions .button,
+				#experience-banner .actions .button,
+				#projects-banner .actions .button {
+					font-size: 0.7rem !important;
+					padding: 0 1.5em !important;
+				}
+				
+				/* Ensure content padding is smaller on mobile */
+				#experience .spotlight .content { 
+					padding: 1.5em 1.5em 1em 1.5em !important; 
+				}
+				
+				#experience .spotlight-details > .details-inner > .details-content {
+					padding: 0 1.5em !important;
+				}
+				
+				#experience .spotlight-details.open > .details-inner > .details-content {
+					padding: 1em 1.5em 1.5em 1.5em !important;
+				}
+			}
 			
 			/* Experience Banner - Perfect Centering */
 			#experience-banner {
