@@ -149,38 +149,65 @@
 				flex-shrink: 0;
 			}
 			
-		/* Banner buttons (LinkedIn, Resume, etc.) - side by side */
-		#banner .actions,
-		#experience-banner .actions,
-		#projects-banner .actions,
-		#contact .actions {
-			display: flex !important;
-			flex-direction: row !important;
-			justify-content: center !important;
-			align-items: center !important;
-			gap: 0.75em !important;
-			flex-wrap: nowrap !important;
-		}
-		
-		#banner .actions li,
-		#experience-banner .actions li,
-		#projects-banner .actions li,
-		#contact .actions li {
-			display: inline-block !important;
-			margin: 0 !important;
-		}
-		
-		#banner .actions .button,
-		#experience-banner .actions .button,
-		#projects-banner .actions .button,
-		#contact .actions .button {
-			font-size: 0.7rem !important;
-			padding: 0 1.5em !important;
-			white-space: nowrap !important;
-			display: inline-block !important;
-		}
-		
-		/* Reduce content padding on mobile */
+	/* Banner - equidistant spacing on mobile */
+	#banner .inner,
+	#experience-banner .inner,
+	#projects-banner .inner {
+		display: flex !important;
+		flex-direction: column !important;
+		justify-content: center !important;
+		align-items: center !important;
+		gap: 1.5em !important;
+		padding: 2em 1.5em !important;
+	}
+	
+	#banner h2,
+	#experience-banner h2,
+	#projects-banner h2 {
+		margin: 0 !important;
+	}
+	
+	#banner .tagline,
+	#banner p,
+	#experience-banner p,
+	#projects-banner p {
+		margin: 0 !important;
+	}
+	
+	/* Banner buttons (LinkedIn, Resume, etc.) - side by side */
+	#banner .actions,
+	#experience-banner .actions,
+	#projects-banner .actions,
+	#contact .actions {
+		display: flex !important;
+		flex-direction: row !important;
+		justify-content: center !important;
+		align-items: center !important;
+		gap: 0.75em !important;
+		flex-wrap: nowrap !important;
+		margin: 0 !important;
+	}
+	
+	#banner .actions li,
+	#experience-banner .actions li,
+	#projects-banner .actions li,
+	#contact .actions li {
+		display: inline-block !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	
+	#banner .actions .button,
+	#experience-banner .actions .button,
+	#projects-banner .actions .button,
+	#contact .actions .button {
+		font-size: 0.7rem !important;
+		padding: 0 1.5em !important;
+		white-space: nowrap !important;
+		display: inline-block !important;
+	}
+	
+	/* Reduce content padding on mobile */
 			#experience .spotlight .content { 
 				padding: 1.5em 1.5em 1em 1.5em !important; 
 			}
@@ -584,7 +611,7 @@
 										<li>LangChain</li>
 									</ul>
 											<ul class="actions special">
-												<li><a href="https://www.fitzty.com/" class="button primary small">View Project</a></li>
+												<li><a href="https://www.fitzty.com/" class="button primary small">Live Application</a></li>
 											</ul>
 										</div>
 									</div>
@@ -604,7 +631,7 @@
 									<li>Next.js</li>
 								</ul>
 											<ul class="actions special">
-												<li><a href="https://www.assignxchange.com/" class="button primary small">View Project</a></li>
+												<li><a href="https://www.assignxchange.com/" class="button primary small">Live Application</a></li>
 											</ul>
 										</div>
 									</div>
@@ -627,7 +654,7 @@
 									<li>React</li>
 								</ul>
 											<ul class="actions special">
-												<li><a href="#" class="button primary small">View Project</a></li>
+												<li><a href="#" class="button primary small">Live Application</a></li>
 											</ul>
 										</div>
 									</div>
@@ -638,7 +665,7 @@
 											<h3>QuickCards AI — Flashcard Generator</h3>
 											<p>Next.js + Firebase app that generates study decks with GPT.</p>
 											<ul class="actions special">
-												<li><a href="https://quick-cards-ai-flashcard-gener-git-880dbd-daivya-shahs-projects.vercel.app/" class="button primary small">View Project</a></li>
+												<li><a href="https://quick-cards-ai-flashcard-gener-git-880dbd-daivya-shahs-projects.vercel.app/" class="button primary small">Live Application</a></li>
 											</ul>
 										</div>
 									</div>
@@ -648,7 +675,7 @@
 											<h3>AnyWebSupport AI — Site Support Bot</h3>
 											<p>Scrapes page content to power a context‑aware support assistant.</p>
 											<ul class="actions special">
-												<li><a href="https://any-web-support-ai-customer-service-for-any-website.vercel.app/" class="button primary small">View Project</a></li>
+												<li><a href="https://any-web-support-ai-customer-service-for-any-website.vercel.app/" class="button primary small">Live Application</a></li>
 											</ul>
 										</div>
 									</div>
@@ -658,7 +685,7 @@
 											<h3>RateMyProf AI — Professor Reviews</h3>
 											<p>RAG + scraping to enrich professor profiles and search.</p>
 											<ul class="actions special">
-												<li><a href="https://rate-my-professor-ai-rate-my-professor.vercel.app/" class="button primary small">View Project</a></li>
+												<li><a href="https://rate-my-professor-ai-rate-my-professor.vercel.app/" class="button primary small">Live Application</a></li>
 											</ul>
 										</div>
 									</div>
@@ -668,7 +695,7 @@
 											<h3>StockSmart AI — Pantry Tracker</h3>
 											<p>Tracks inventory and suggests recipes to reduce waste.</p>
 											<ul class="actions special">
-												<li><a href="https://stock-smart-ai-pantry-tracker.vercel.app/" class="button primary small">View Project</a></li>
+												<li><a href="https://stock-smart-ai-pantry-tracker.vercel.app/" class="button primary small">Live Application</a></li>
 											</ul>
 										</div>
 									</div>
