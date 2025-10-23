@@ -107,56 +107,71 @@
 				#experience .spotlight .content .tech-list { justify-content: center; }
 			}
 
-			/* Mobile phone button fixes - responsive sizing for all buttons */
-			@media screen and (max-width: 736px) {
-				/* Global button sizing on mobile */
-				input[type="submit"],
-				input[type="reset"],
-				input[type="button"],
-				button,
-				.button {
-					font-size: 0.7rem !important;
-					padding: 0 1.5em !important;
-					white-space: nowrap;
-					min-height: 2.75em;
-				}
-				
-				/* View Details button - compact on mobile */
-				#experience .spotlight .actions a.button.details {
-					font-size: 0.65rem !important;
-					padding: 0.5em 0.65em 0.5em 0.85em !important;
-					gap: 0.5em;
-				}
-				
-				#experience .spotlight .actions a.button.details .chip {
-					width: 1.6em;
-					height: 1.6em;
-					font-size: 0.85em;
-				}
-				
-				/* Banner buttons (LinkedIn, Resume, etc.) */
-				#banner .actions .button,
-				#experience-banner .actions .button,
-				#projects-banner .actions .button,
-				#contact .actions .button {
-					font-size: 0.7rem !important;
-					padding: 0 1.5em !important;
-				}
-				
-				/* Reduce content padding on mobile */
-				#experience .spotlight .content { 
-					padding: 1.5em 1.5em 1em 1.5em !important; 
-				}
-				
-				/* Details section padding on mobile */
-				#experience .spotlight-details > .details-inner > .details-content {
-					padding: 0 1.5em !important;
-				}
-				
-				#experience .spotlight-details.open > .details-inner > .details-content {
-					padding: 1em 1.5em 1.5em 1.5em !important;
-				}
+		/* Mobile phone button fixes - responsive sizing for all buttons */
+		@media screen and (max-width: 736px) {
+			/* Global button sizing on mobile */
+			input[type="submit"],
+			input[type="reset"],
+			input[type="button"],
+			button,
+			.button {
+				font-size: 0.7rem !important;
+				padding: 0 1.5em !important;
+				white-space: nowrap;
+				min-height: 2.75em;
 			}
+			
+			/* Keep actions list centered and inline */
+			#experience .spotlight .content .actions {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			
+			#experience .spotlight .content .actions li {
+				display: inline-block;
+			}
+			
+			/* View Details button - compact and centered on mobile */
+			#experience .spotlight .actions a.button.details {
+				font-size: 0.65rem !important;
+				padding: 0.5em 0.65em 0.5em 0.85em !important;
+				gap: 0.5em;
+				display: inline-flex !important;
+				width: auto !important;
+				max-width: fit-content;
+			}
+			
+			#experience .spotlight .actions a.button.details .chip {
+				width: 1.6em;
+				height: 1.6em;
+				font-size: 0.85em;
+				flex-shrink: 0;
+			}
+			
+			/* Banner buttons (LinkedIn, Resume, etc.) */
+			#banner .actions .button,
+			#experience-banner .actions .button,
+			#projects-banner .actions .button,
+			#contact .actions .button {
+				font-size: 0.7rem !important;
+				padding: 0 1.5em !important;
+			}
+			
+			/* Reduce content padding on mobile */
+			#experience .spotlight .content { 
+				padding: 1.5em 1.5em 1em 1.5em !important; 
+			}
+			
+			/* Details section padding on mobile */
+			#experience .spotlight-details > .details-inner > .details-content {
+				padding: 0 1.5em !important;
+			}
+			
+			#experience .spotlight-details.open > .details-inner > .details-content {
+				padding: 1em 1.5em 1.5em 1.5em !important;
+			}
+		}
 		
 		/* Experience Banner - Perfect Centering */
 			#experience-banner {
