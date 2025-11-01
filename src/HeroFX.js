@@ -14,6 +14,16 @@ export class HeroFX {
 		this.mouse = new THREE.Vector2();
 		this.group = new THREE.Group();
 		this.scene.add(this.group);
+		
+		this.explodeState = null; // null | { phase: 'explode' | 'bounce' | 'return', startTime: number }
+		this.explodedVelocities = [];
+		this.originalPositions = [];
+		this.returnProgress = 0;
+		this.spriteBounceCounts = [];
+		this.lastVelocitySigns = []; // track velocity signs to detect actual bounces
+		this.hammerCanvas = null; // cache hammer cursor canvas
+		this.hammerRotation = 0; // current hammer rotation angle
+		this.hammerAnimation = null; // null | { startTime: number, startRotation: number }
 
 		// Prepare SVG loader helper
 		this._loadSvgTexture = async (url) => {
@@ -41,6 +51,8 @@ export class HeroFX {
 		this._onResize();
 		window.addEventListener('resize', this._onResize);
 		window.addEventListener('mousemove', this._onMouseMove);
+		this.renderer.domElement.addEventListener('click', this._onClick);
+		this.renderer.domElement.style.pointerEvents = 'auto';
 		this._animate();
 	}
 
@@ -48,6 +60,7 @@ export class HeroFX {
 		cancelAnimationFrame(this._raf);
 		window.removeEventListener('resize', this._onResize);
 		window.removeEventListener('mousemove', this._onMouseMove);
+		this.renderer.domElement.removeEventListener('click', this._onClick);
 		this.renderer.dispose();
 		if (this.containerEl && this.renderer.domElement.parentNode === this.containerEl) {
 			this.containerEl.removeChild(this.renderer.domElement);
@@ -105,34 +118,293 @@ export class HeroFX {
 		this.xScale = Math.min(1.5, maxAllowedX / Math.max(1, maxPlannedRadius));
 	};
 
+	_getHammerCursor = (rotation = 0) => {
+		const canvas = document.createElement('canvas');
+		canvas.width = 128;
+		canvas.height = 128;
+		const ctx = canvas.getContext('2d');
+		
+		// Draw hammer emoji with rotation
+		ctx.save();
+		ctx.translate(64, 64);
+		ctx.rotate(rotation);
+		ctx.font = '96px Arial';
+		ctx.fillText('🔨', -48, 32);
+		ctx.restore();
+		
+		return canvas.toDataURL();
+	};
+
 	_onMouseMove = (e) => {
 		const rect = this.containerEl.getBoundingClientRect();
 		this.mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
 		this.mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+		
+		// Check if hovering over any sprite
+		if (!this.explodeState && this.toolSprites) {
+			const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+			const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+			const clickWorldPos = new THREE.Vector3(x * 50, y * 40, 0);
+			
+			let hovering = false;
+			const hoverThreshold = 15;
+			
+			for (const sprite of this.toolSprites) {
+				const distance = sprite.position.distanceTo(clickWorldPos);
+				if (distance < hoverThreshold) {
+					hovering = true;
+					break;
+				}
+			}
+			
+			// Change cursor to hammer emoji when hovering
+			if (hovering) {
+				const dataUrl = this._getHammerCursor(this.hammerRotation);
+				this.renderer.domElement.style.cursor = `url(${dataUrl}) 64 64, pointer`;
+			} else {
+				this.renderer.domElement.style.cursor = 'default';
+			}
+		} else if (!this.explodeState) {
+			this.renderer.domElement.style.cursor = 'default';
+		}
+	};
+
+	_onClick = (e) => {
+		if (this.explodeState) return; // already exploding
+		if (!this.toolSprites || this.toolSprites.length === 0) return;
+		
+		// Get click position in normalized screen coordinates
+		const rect = this.containerEl.getBoundingClientRect();
+		const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+		const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+		
+		// Convert to 3D world position
+		const clickWorldPos = new THREE.Vector3(x * 50, y * 40, 0);
+		
+		// Check if click is near any sprite
+		let clickedSprite = false;
+		const clickThreshold = 15; // distance threshold
+		
+		for (const sprite of this.toolSprites) {
+			const distance = sprite.position.distanceTo(clickWorldPos);
+			if (distance < clickThreshold) {
+				clickedSprite = true;
+				break;
+			}
+		}
+		
+		if (!clickedSprite) return; // clicked empty space
+		
+		// Start hammer rotation animation
+		this.hammerAnimation = { startTime: this.clock.getElapsedTime(), startRotation: this.hammerRotation };
+		
+		// Start explosion
+		this.explodeState = { phase: 'explode', startTime: this.clock.getElapsedTime() };
+		this.explodedVelocities = [];
+		this.originalPositions = [];
+		this.returnProgress = 0;
+		this.spriteBounceCounts = [];
+		this.lastVelocitySigns = [];
+		
+		// Store original positions and create velocities
+		this.toolSprites.forEach((sprite, i) => {
+			const pos = sprite.position.clone();
+			this.originalPositions[i] = pos;
+			
+			// Velocity away from click point - INSANELY fast to ensure 5+ bounces
+			const dir = pos.clone().sub(clickWorldPos).normalize();
+			const speed = 150 + Math.random() * 100; // EXTREMELY fast: 150-250
+			this.explodedVelocities[i] = dir.multiplyScalar(speed);
+			this.spriteBounceCounts[i] = 0; // initialize bounce counter
+			this.lastVelocitySigns[i] = { x: 0, y: 0, z: 0 }; // initialize velocity sign tracking
+		});
 	};
 
 	_animate = () => {
 		this._raf = requestAnimationFrame(this._animate);
 		const t = this.clock.getElapsedTime();
-		// Subtle mouse tilt only
-		this.group.rotation.y = this.mouse.x * 0.12;
-		this.group.rotation.x = this.mouse.y * 0.08;
+		
+		// Handle hammer rotation animation
+		if (this.hammerAnimation) {
+			const elapsed = t - this.hammerAnimation.startTime;
+			const duration = 0.4; // 400ms rotation animation for smoother feel
+			
+			if (elapsed < duration) {
+				// Rotate hammer down and bounce back
+				const progress = elapsed / duration;
+				
+				if (progress < 0.5) {
+					// Swing down to -45 degrees with ease-in
+					const swingProgress = progress * 2;
+					const easeIn = swingProgress * swingProgress;
+					this.hammerRotation = this.hammerAnimation.startRotation - (Math.PI / 4) * easeIn;
+				} else {
+					// Bounce back to 0 with ease-out
+					const bounceProgress = (progress - 0.5) * 2;
+					const easeOut = 1 - Math.pow(1 - bounceProgress, 3);
+					this.hammerRotation = -(Math.PI / 4) + (Math.PI / 4) * easeOut;
+				}
+				
+				// Update cursor
+				const dataUrl = this._getHammerCursor(this.hammerRotation);
+				this.renderer.domElement.style.cursor = `url(${dataUrl}) 64 64, pointer`;
+			} else {
+				// Animation complete
+				this.hammerRotation = 0;
+				this.hammerAnimation = null;
+			}
+		}
+		
+		// Handle explode animation
+		if (this.explodeState) {
+			const elapsed = t - this.explodeState.startTime;
+			const dt = 0.016; // ~60fps
+			
+			if (this.explodeState.phase === 'explode') {
+				// Explode phase: scatter outward
+				for (let i = 0; i < this.toolSprites.length; i++) {
+					const s = this.toolSprites[i];
+					s.position.add(this.explodedVelocities[i].clone().multiplyScalar(dt));
+					
+					if (s.userData && s.userData.label) {
+						const lbl = s.userData.label;
+						lbl.position.set(s.position.x, s.position.y - (lbl.userData.yGap || 3.8), s.position.z);
+					}
+				}
+				
+				// Switch to bounce after 0.2s (much faster)
+				if (elapsed > 0.2) {
+					this.explodeState.phase = 'bounce';
+					this.explodeState.startTime = t;
+				}
+			} else if (this.explodeState.phase === 'bounce') {
+				// Bounce phase: apply physics with boundary checks
+				const halfH = Math.tan(THREE.MathUtils.degToRad(this.camera.fov * 0.5)) * this.camera.position.z;
+				const halfW = halfH * this.camera.aspect;
+				const damping = 0.99; // minimal damping for maximum bouncing
+				
+				for (let i = 0; i < this.toolSprites.length; i++) {
+					const s = this.toolSprites[i];
+					const lastSign = this.lastVelocitySigns[i];
+					
+					// Update position
+					s.position.add(this.explodedVelocities[i].clone().multiplyScalar(dt));
+					
+					// Bounce off LEFT and RIGHT sides
+					if (Math.abs(s.position.x) > halfW - 3) {
+						// Count bounce if velocity changed direction
+						if (lastSign.x !== 0 && Math.sign(this.explodedVelocities[i].x) !== lastSign.x) {
+							this.spriteBounceCounts[i]++;
+						}
+						this.explodedVelocities[i].x *= -damping;
+						s.position.x = Math.sign(s.position.x) * (halfW - 3);
+					}
+					
+					// Bounce off TOP and BOTTOM sides
+					if (Math.abs(s.position.y) > halfH - 3) {
+						// Count bounce if velocity changed direction
+						if (lastSign.y !== 0 && Math.sign(this.explodedVelocities[i].y) !== lastSign.y) {
+							this.spriteBounceCounts[i]++;
+						}
+						this.explodedVelocities[i].y *= -damping;
+						s.position.y = Math.sign(s.position.y) * (halfH - 3);
+					}
+					
+					// Bounce off Z boundaries
+					if (Math.abs(s.position.z) > 50) {
+						// Count bounce if velocity changed direction
+						if (lastSign.z !== 0 && Math.sign(this.explodedVelocities[i].z) !== lastSign.z) {
+							this.spriteBounceCounts[i]++;
+						}
+						this.explodedVelocities[i].z *= -damping;
+						s.position.z = Math.sign(s.position.z) * 50;
+					}
+					
+					// Apply damping
+					this.explodedVelocities[i].multiplyScalar(damping);
+					
+					// Update velocity signs after all bounce logic
+					this.lastVelocitySigns[i] = {
+						x: Math.sign(this.explodedVelocities[i].x),
+						y: Math.sign(this.explodedVelocities[i].y),
+						z: Math.sign(this.explodedVelocities[i].z)
+					};
+					
+					if (s.userData && s.userData.label) {
+						const lbl = s.userData.label;
+						lbl.position.set(s.position.x, s.position.y - (lbl.userData.yGap || 3.8), s.position.z);
+					}
+				}
+				
+				// Check if velocities are low enough to start return
+				const avgSpeed = this.explodedVelocities.reduce((sum, vel) => sum + vel.length(), 0) / this.explodedVelocities.length;
+				if (avgSpeed < 1.0) {
+					this.explodeState.phase = 'return';
+					this.explodeState.startTime = t;
+				}
+			} else if (this.explodeState.phase === 'return') {
+				// Return phase: smoothly return to original rotation paths
+				const returnDuration = 2.0;
+				const progress = Math.min(1, (t - this.explodeState.startTime) / returnDuration);
+				
+				const easeOut = 1 - Math.pow(1 - progress, 3); // cubic ease-out
+				
+				for (let i = 0; i < this.toolSprites.length; i++) {
+					const s = this.toolSprites[i];
+					const orig = this.originalPositions[i];
+					
+					// Lerp towards original position
+					s.position.lerp(orig, easeOut);
+					
+					if (s.userData && s.userData.label) {
+						const lbl = s.userData.label;
+						lbl.position.set(s.position.x, s.position.y - (lbl.userData.yGap || 3.8), s.position.z);
+					}
+				}
+				
+				// End animation and resume normal rotation
+				if (progress >= 1) {
+					// Recalculate angle offsets for seamless continuation from current positions
+					const currentTime = this.clock.getElapsedTime();
+					for (let i = 0; i < this.toolSprites.length; i++) {
+						const s = this.toolSprites[i];
+						const radius = s.userData.radius || 45;
+						const circleScale = Math.min(this.xScale || 1, 0.70);
+						
+						// Calculate current angle based on x, y position
+						const scaledX = s.position.x / circleScale;
+						const scaledY = (s.position.y - s.userData.yOffset) / circleScale;
+						const currentAngle = Math.atan2(scaledY, scaledX);
+						
+						// Adjust angle offset so sprite continues from current position
+						s.userData.angleOffset = currentAngle - (currentTime * s.userData.speed);
+					}
+					
+					this.explodeState = null;
+				}
+			}
+		} else {
+			// Normal rotation
+			this.group.rotation.y = this.mouse.x * 0.12;
+			this.group.rotation.x = this.mouse.y * 0.08;
 
-		if (this.toolSprites) {
-			for (let i = 0; i < this.toolSprites.length; i++) {
-				const s = this.toolSprites[i];
-				const a = t * s.userData.speed + s.userData.angleOffset;
-				// Proper circular path (same radius on both axes), clamped to viewport
-				const circleScale = Math.min(this.xScale || 1, 0.70);
-				s.position.y = Math.sin(a) * (s.userData.radius * circleScale) + (s.userData.yOffset || 0);
-				s.position.x = Math.cos(a) * (s.userData.radius * circleScale);
-				s.position.z = Math.sin(a) * 2;
-				if (s.userData && s.userData.label) {
-					const lbl = s.userData.label;
-					lbl.position.set(s.position.x, s.position.y - (lbl.userData.yGap || 3.8), s.position.z);
+			if (this.toolSprites) {
+				for (let i = 0; i < this.toolSprites.length; i++) {
+					const s = this.toolSprites[i];
+					const a = t * s.userData.speed + s.userData.angleOffset;
+					// Proper circular path (same radius on both axes), clamped to viewport
+					const circleScale = Math.min(this.xScale || 1, 0.70);
+					s.position.y = Math.sin(a) * (s.userData.radius * circleScale) + (s.userData.yOffset || 0);
+					s.position.x = Math.cos(a) * (s.userData.radius * circleScale);
+					s.position.z = Math.sin(a) * 2;
+					if (s.userData && s.userData.label) {
+						const lbl = s.userData.label;
+						lbl.position.set(s.position.x, s.position.y - (lbl.userData.yGap || 3.8), s.position.z);
+					}
 				}
 			}
 		}
+		
 		this.renderer.render(this.scene, this.camera);
 	};
 
