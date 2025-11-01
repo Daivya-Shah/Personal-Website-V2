@@ -347,7 +347,24 @@
 			#projects .box .tech-list { justify-content: center; }
 			#projects .box .tech-list li { background: rgba(33, 178, 166, 0.2); border: 1.5px solid rgba(255, 255, 255, 0.5); color: #ffffff; padding: 0.35em 0.6em; border-radius: 999px; font-size: 0.8em; line-height: 1; white-space: nowrap; }
 			#projects .box .tech-list li:hover { background: rgba(33, 178, 166, 0.3); border-color: rgba(255, 255, 255, 0.8); }
-			#projects .box .actions { display: flex; justify-content: center; width: 100%; }
+			#projects .box .actions { display: flex; justify-content: center; width: 100%; gap: 0.5em; }
+			#projects .box .actions li { padding: 0 !important; }
+			#projects .box .actions .icon {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 2.5em;
+				height: 2.5em;
+				border: 1.5px solid rgba(255, 255, 255, 0.5);
+				border-radius: 6px;
+				color: #ffffff !important;
+				background: rgba(255, 255, 255, 0.05);
+				transition: background-color 0.2s ease, border-color 0.2s ease;
+			}
+			#projects .box .actions .icon:hover {
+				background: rgba(255, 255, 255, 0.1);
+				border-color: rgba(255, 255, 255, 0.8);
+			}
 			
 			/* Skills & Tools */
 			#skills .skills-category { margin: 2em 0 0 0; }
@@ -594,7 +611,7 @@
 									<div class="col-6 col-12-medium">
 										<div class="box">
 											<span class="image fit"><img src="images/fitzty.png" alt="Fitzty — AI-Powered Fashion Intelligence" /></span>
-											<h3>Fitzty</h3>
+											<h3>Fitzty — AI-Powered Fashion Intelligence</h3>
 											<p>AI-powered fashion platform that digitizes wardrobes, generates outfits, and recommends styles using GPT-4 Vision and DALL-E 3.</p>
 									<ul class="tech-list">
 										<li>GPT-4 Vision</li>
@@ -605,7 +622,7 @@
 										<li>Next.js</li>
 									</ul>
 											<ul class="actions special">
-												<li><a href="https://www.fitzty.com/" class="button primary small">Live Application</a></li>
+												<li><a href="https://www.fitzty.com/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
 												<li><a href="https://github.com/Daivya-Shah/Fitzty.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
 											</ul>
 										</div>
@@ -613,7 +630,7 @@
 									<div class="col-6 col-12-medium">
 										<div class="box">
 											<span class="image fit"><img src="images/assignxchange.png" alt="AssignXchange — AI Deal Intelligence" /></span>
-											<h3>AssignXchange</h3>
+											<h3>AssignXchange — AI Deal Intelligence</h3>
 											<p>Marketplace connecting real estate wholesalers and investors through intelligent deal matching using GPT-4 embeddings and semantic search.</p>
 								<ul class="tech-list">
 									<li>GPT-4</li>
@@ -623,7 +640,7 @@
 									<li>Next.js</li>
 								</ul>
 											<ul class="actions special">
-												<li><a href="https://www.assignxchange.com/" class="button primary small">Live Application</a></li>
+												<li><a href="https://www.assignxchange.com/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
 												<li><a href="https://github.com/Daivya-Shah/AssignXchange.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
 											</ul>
 										</div>
@@ -631,7 +648,7 @@
 									<div class="col-6 col-12-medium">
 										<div class="box">
 								<span class="image fit"><img src="images/harvest.png" alt="Harvest — Manufacturer Discovery" /></span>
-								<h3>Harvest</h3>
+								<h3>Harvest — Manufacturer Discovery</h3>
 											<p>AI-powered platform helping CPG founders discover verified manufacturers using hybrid semantic search and learning-to-rank.</p>
 								<ul class="tech-list">
 									<li>FastAPI</li>
@@ -644,9 +661,6 @@
 									<li>Selenium</li>
 									<li>Ruby</li>
 								</ul>
-											<ul class="actions special">
-												<li><a href="#" class="button primary small">Live Application</a></li>
-											</ul>
 										</div>
 									</div>
 						<div class="col-12"><h3 class="older-title">Older Projects</h3></div>
@@ -664,7 +678,7 @@
 												<li>Next.js</li>
 											</ul>
 											<ul class="actions special">
-												<li><a href="https://any-web-support-ai-customer-service-for-any-website.vercel.app/" class="button primary small">Live Application</a></li>
+												<li><a href="https://any-web-support-ai-customer-service-for-any-website.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
 												<li><a href="https://github.com/Daivya-Shah/AnyWebSupport-AI-Customer-Service-for-Any-Website.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
 											</ul>
 										</div>
@@ -683,7 +697,7 @@
 												<li>Next.js</li>
 											</ul>
 											<ul class="actions special">
-												<li><a href="https://quick-cards-ai-flashcard-gener-git-880dbd-daivya-shahs-projects.vercel.app/" class="button primary small">Live Application</a></li>
+												<li><a href="https://quick-cards-ai-flashcard-gener-git-880dbd-daivya-shahs-projects.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
 												<li><a href="https://github.com/Daivya-Shah/QuickCards-AI-Flashcard-Generator.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
 											</ul>
 										</div>
@@ -702,7 +716,7 @@
 												<li>Next.js</li>
 											</ul>
 											<ul class="actions special">
-												<li><a href="https://rate-my-professor-ai-rate-my-professor.vercel.app/" class="button primary small">Live Application</a></li>
+												<li><a href="https://rate-my-professor-ai-rate-my-professor.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
 												<li><a href="https://github.com/Daivya-Shah/RateMyProfessor-AI-Professor-Reviews.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
 											</ul>
 										</div>
@@ -719,7 +733,7 @@
 												<li>Next.js</li>
 											</ul>
 											<ul class="actions special">
-												<li><a href="https://stock-smart-ai-pantry-tracker.vercel.app/" class="button primary small">Live Application</a></li>
+												<li><a href="https://stock-smart-ai-pantry-tracker.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
 												<li><a href="https://github.com/Daivya-Shah/StockSmart-AI-Pantry-Tracker.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
 											</ul>
 										</div>
