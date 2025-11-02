@@ -74,26 +74,24 @@
 					display: inline-flex; 
 					align-items: center;
 					justify-content: center;
-					line-height: 1; 
+					line-height: 0;
 					vertical-align: middle;
-					will-change: transform;
-					transform: translate3d(0, 0, 0);
-					-webkit-transform: translate3d(0, 0, 0);
-					backface-visibility: hidden;
-					transform-style: preserve-3d;
-					-webkit-transform-style: preserve-3d;
+					width: 10px;
+					height: 6px;
+					flex-shrink: 0;
 				}
 				#experience .spotlight .actions a.button .chev svg {
-					width: 100%;
-					height: 100%;
+					width: 10px;
+					height: 6px;
 					display: block;
-					will-change: transform;
-					transform: translate3d(0, 0, 0);
-					-webkit-transform: translate3d(0, 0, 0);
+					shape-rendering: geometricPrecision;
+					text-rendering: geometricPrecision;
+					image-rendering: crisp-edges;
+					-webkit-font-smoothing: auto;
 				}
 				#experience .spotlight .actions a.button[aria-expanded="true"] .chev { 
-					transform: translate3d(0, 0, 0) rotate(180deg);
-					-webkit-transform: translate3d(0, 0, 0) rotate(180deg);
+					transform: rotate(180deg);
+					-webkit-transform: rotate(180deg);
 				}
 				#experience .spotlight .actions a.button .label { vertical-align: middle; }
 				#experience .spotlight .actions a.button.details {
@@ -185,14 +183,14 @@
 				flex-shrink: 0;
 			}
 			
-			/* SVG icon sizing on mobile */
+			/* SVG icon sizing on mobile - keep fixed pixel size for crisp rendering */
 			#experience .spotlight .actions a.button .chev {
-				width: 0.65em;
-				height: 0.65em;
+				width: 10px;
+				height: 6px;
 			}
 			#experience .spotlight .actions a.button .chev svg {
-				width: 100%;
-				height: 100%;
+				width: 10px;
+				height: 6px;
 			}
 			
 	/* Banner - equidistant spacing on mobile */
@@ -539,7 +537,7 @@
 						</h2>
 								<p><strong>Jun 2025 – Aug 2025 | New York, NY</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-newmark"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-newmark"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>TypeScript</li>
@@ -566,7 +564,7 @@
 						</h2>
 								<p><strong>Jan 2025 – Mar 2025 | New York, NY</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-ubiq"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-ubiq"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>Figma</li>
@@ -592,7 +590,7 @@
 						</h2>
 								<p><strong>Jul 2024 – Dec 2024 | New York, NY</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-everise"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-everise"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>Python</li>
@@ -619,7 +617,7 @@
 						</h2>
 								<p><strong>Jun 2024 – Jul 2024 | Chicago, IL</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-emeasurematics"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-emeasurematics"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>Python</li>
