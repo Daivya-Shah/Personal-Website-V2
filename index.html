@@ -71,33 +71,29 @@
 				#experience .spotlight-details p { margin: 0 0 0.75em 0; }
 				#experience .spotlight .actions a.button .chev { 
 					transition: transform 200ms ease; 
-					display: inline-block; 
+					display: inline-flex; 
+					align-items: center;
+					justify-content: center;
 					line-height: 1; 
+					vertical-align: middle;
 					will-change: transform;
 					transform: translate3d(0, 0, 0);
-					-webkit-font-smoothing: antialiased;
-					-moz-osx-font-smoothing: grayscale;
-					backface-visibility: hidden;
-					perspective: 1000px;
-					-webkit-perspective: 1000px;
-				}
-				#experience .spotlight .actions a.button .chev:before {
-					transform: translate3d(0, 0, 0);
-					will-change: transform;
-					backface-visibility: hidden;
-					-webkit-font-smoothing: antialiased;
 					-webkit-transform: translate3d(0, 0, 0);
-					text-rendering: optimizeLegibility;
-					-webkit-text-stroke: 0;
-					font-feature-settings: normal;
+					backface-visibility: hidden;
+					transform-style: preserve-3d;
+					-webkit-transform-style: preserve-3d;
+				}
+				#experience .spotlight .actions a.button .chev svg {
+					width: 100%;
+					height: 100%;
+					display: block;
+					will-change: transform;
+					transform: translate3d(0, 0, 0);
+					-webkit-transform: translate3d(0, 0, 0);
 				}
 				#experience .spotlight .actions a.button[aria-expanded="true"] .chev { 
 					transform: translate3d(0, 0, 0) rotate(180deg);
 					-webkit-transform: translate3d(0, 0, 0) rotate(180deg);
-				}
-				#experience .spotlight .actions a.button[aria-expanded="true"] .chev:before {
-					transform: translate3d(0, 0, 0);
-					-webkit-transform: translate3d(0, 0, 0);
 				}
 				#experience .spotlight .actions a.button .label { vertical-align: middle; }
 				#experience .spotlight .actions a.button.details {
@@ -189,20 +185,14 @@
 				flex-shrink: 0;
 			}
 			
-			/* iOS-specific fixes for crisp icon rendering */
+			/* SVG icon sizing on mobile */
 			#experience .spotlight .actions a.button .chev {
-				width: 1em;
-				height: 1em;
-				transform: translate3d(0, 0, 0) scale(1);
-				-webkit-transform: translate3d(0, 0, 0) scale(1);
+				width: 0.65em;
+				height: 0.65em;
 			}
-			#experience .spotlight .actions a.button .chev:before {
-				transform: translate3d(0, 0, 0) scale(1);
-				-webkit-transform: translate3d(0, 0, 0) scale(1);
-			}
-			#experience .spotlight .actions a.button[aria-expanded="true"] .chev {
-				transform: translate3d(0, 0, 0) rotate(180deg) scale(1);
-				-webkit-transform: translate3d(0, 0, 0) rotate(180deg) scale(1);
+			#experience .spotlight .actions a.button .chev svg {
+				width: 100%;
+				height: 100%;
 			}
 			
 	/* Banner - equidistant spacing on mobile */
@@ -549,7 +539,7 @@
 						</h2>
 								<p><strong>Jun 2025 – Aug 2025 | New York, NY</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-newmark"><span class="label">View Details</span><span class="chip"><span class="chev icon solid fa-chevron-down"></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-newmark"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>TypeScript</li>
@@ -576,7 +566,7 @@
 						</h2>
 								<p><strong>Jan 2025 – Mar 2025 | New York, NY</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-ubiq"><span class="label">View Details</span><span class="chip"><span class="chev icon solid fa-chevron-down"></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-ubiq"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>Figma</li>
@@ -602,7 +592,7 @@
 						</h2>
 								<p><strong>Jul 2024 – Dec 2024 | New York, NY</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-everise"><span class="label">View Details</span><span class="chip"><span class="chev icon solid fa-chevron-down"></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-everise"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>Python</li>
@@ -629,7 +619,7 @@
 						</h2>
 								<p><strong>Jun 2024 – Jul 2024 | Chicago, IL</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-emeasurematics"><span class="label">View Details</span><span class="chip"><span class="chev icon solid fa-chevron-down"></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-emeasurematics"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>Python</li>
