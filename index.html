@@ -74,13 +74,30 @@
 					display: inline-block; 
 					line-height: 1; 
 					will-change: transform;
-					transform: translateZ(0);
+					transform: translate3d(0, 0, 0);
 					-webkit-font-smoothing: antialiased;
 					-moz-osx-font-smoothing: grayscale;
 					backface-visibility: hidden;
+					perspective: 1000px;
+					-webkit-perspective: 1000px;
+				}
+				#experience .spotlight .actions a.button .chev:before {
+					transform: translate3d(0, 0, 0);
+					will-change: transform;
+					backface-visibility: hidden;
+					-webkit-font-smoothing: antialiased;
+					-webkit-transform: translate3d(0, 0, 0);
+					text-rendering: optimizeLegibility;
+					-webkit-text-stroke: 0;
+					font-feature-settings: normal;
 				}
 				#experience .spotlight .actions a.button[aria-expanded="true"] .chev { 
-					transform: translateZ(0) rotate(180deg); 
+					transform: translate3d(0, 0, 0) rotate(180deg);
+					-webkit-transform: translate3d(0, 0, 0) rotate(180deg);
+				}
+				#experience .spotlight .actions a.button[aria-expanded="true"] .chev:before {
+					transform: translate3d(0, 0, 0);
+					-webkit-transform: translate3d(0, 0, 0);
 				}
 				#experience .spotlight .actions a.button .label { vertical-align: middle; }
 				#experience .spotlight .actions a.button.details {
@@ -96,7 +113,19 @@
 					box-shadow: none;
 					transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 120ms ease, box-shadow 160ms ease;
 				}
-				#experience .spotlight .actions a.button.details .chip { display: inline-grid; place-items: center; width: 1.85em; height: 1.85em; border-radius: 999px; background: #21b2a6; color: #ffffff; transition: background-color 160ms ease, transform 160ms ease; }
+				#experience .spotlight .actions a.button.details .chip { 
+					display: inline-grid; 
+					place-items: center; 
+					width: 1.85em; 
+					height: 1.85em; 
+					border-radius: 999px; 
+					background: #21b2a6; 
+					color: #ffffff; 
+					transition: background-color 160ms ease, transform 160ms ease;
+					transform: translateZ(0);
+					-webkit-transform: translateZ(0);
+					backface-visibility: hidden;
+				}
 				#experience .spotlight .actions a.button.details:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.5); }
 				#experience .spotlight .actions a.button.details:hover .chip { background: #1fa89d; }
 				#experience .spotlight .actions a.button.details[aria-expanded="true"] { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.5); }
@@ -158,6 +187,22 @@
 				height: 1.6em;
 				font-size: 0.85em;
 				flex-shrink: 0;
+			}
+			
+			/* iOS-specific fixes for crisp icon rendering */
+			#experience .spotlight .actions a.button .chev {
+				width: 1em;
+				height: 1em;
+				transform: translate3d(0, 0, 0) scale(1);
+				-webkit-transform: translate3d(0, 0, 0) scale(1);
+			}
+			#experience .spotlight .actions a.button .chev:before {
+				transform: translate3d(0, 0, 0) scale(1);
+				-webkit-transform: translate3d(0, 0, 0) scale(1);
+			}
+			#experience .spotlight .actions a.button[aria-expanded="true"] .chev {
+				transform: translate3d(0, 0, 0) rotate(180deg) scale(1);
+				-webkit-transform: translate3d(0, 0, 0) rotate(180deg) scale(1);
 			}
 			
 	/* Banner - equidistant spacing on mobile */
