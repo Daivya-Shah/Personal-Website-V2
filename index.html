@@ -9,6 +9,9 @@
 		<title>Daivya Shah</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+		<link rel="icon" type="image/png" sizes="32x32" href="images/me_circle_32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="images/me_circle_16.png" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
@@ -69,24 +72,8 @@
 				transform: translateY(0);
 			}
 				#experience .spotlight-details p { margin: 0 0 0.75em 0; }
-				#experience .spotlight .actions a.button .chev { 
-					transition: transform 200ms ease; 
-					display: inline-flex; 
-					align-items: center;
-					justify-content: center;
-					vertical-align: middle;
-					flex-shrink: 0;
-				}
-				#experience .spotlight .actions a.button .chev svg {
-					display: block;
-					flex-shrink: 0;
-					width: 100%;
-					height: 100%;
-				}
-				#experience .spotlight .actions a.button[aria-expanded="true"] .chev { 
-					transform: rotate(180deg);
-					-webkit-transform: rotate(180deg);
-				}
+				#experience .spotlight .actions a.button .chev { transition: transform 200ms ease; display: inline-block; line-height: 1; }
+				#experience .spotlight .actions a.button[aria-expanded="true"] .chev { transform: rotate(180deg); }
 				#experience .spotlight .actions a.button .label { vertical-align: middle; }
 				#experience .spotlight .actions a.button.details {
 					display: inline-flex;
@@ -101,17 +88,7 @@
 					box-shadow: none;
 					transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 120ms ease, box-shadow 160ms ease;
 				}
-				#experience .spotlight .actions a.button.details .chip { 
-					display: inline-flex; 
-					align-items: center;
-					justify-content: center;
-					width: 1.85em; 
-					height: 1.85em; 
-					border-radius: 999px; 
-					background: #21b2a6; 
-					color: #ffffff; 
-					transition: background-color 160ms ease;
-				}
+				#experience .spotlight .actions a.button.details .chip { display: inline-grid; place-items: center; width: 1.85em; height: 1.85em; border-radius: 999px; background: #21b2a6; color: #ffffff; transition: background-color 160ms ease, transform 160ms ease; }
 				#experience .spotlight .actions a.button.details:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.5); }
 				#experience .spotlight .actions a.button.details:hover .chip { background: #1fa89d; }
 				#experience .spotlight .actions a.button.details[aria-expanded="true"] { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.5); }
@@ -174,7 +151,6 @@
 				font-size: 0.85em;
 				flex-shrink: 0;
 			}
-			
 			
 	/* Banner - equidistant spacing on mobile */
 	#banner .inner,
@@ -490,7 +466,7 @@
 								<h2>Quick Facts About Me</h2>
 							</header>
 						<div class="about-logos">
-							<img src="images/me.jpg" alt="Daivya Shah portrait" />
+							<img src="images/me.jpg" alt="Daivya Shah" />
 								<img src="images/nyu_logo.png" alt="NYU logo" />
 							</div>
 							<ul class="facts">
@@ -520,7 +496,7 @@
 						</h2>
 								<p><strong>Jun 2025 – Aug 2025 | New York, NY</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-newmark"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5L6 6L10.5 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-newmark"><span class="label">View Details</span><span class="chip"><span class="chev icon solid fa-chevron-down"></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>TypeScript</li>
@@ -547,7 +523,7 @@
 						</h2>
 								<p><strong>Jan 2025 – Mar 2025 | New York, NY</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-ubiq"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5L6 6L10.5 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-ubiq"><span class="label">View Details</span><span class="chip"><span class="chev icon solid fa-chevron-down"></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>Figma</li>
@@ -573,7 +549,7 @@
 						</h2>
 								<p><strong>Jul 2024 – Dec 2024 | New York, NY</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-everise"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5L6 6L10.5 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-everise"><span class="label">View Details</span><span class="chip"><span class="chev icon solid fa-chevron-down"></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>Python</li>
@@ -600,7 +576,7 @@
 						</h2>
 								<p><strong>Jun 2024 – Jul 2024 | Chicago, IL</strong></p>
 						<ul class="actions">
-						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-emeasurematics"><span class="label">View Details</span><span class="chip"><span class="chev"><svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5L6 6L10.5 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
+						<li><a href="javascript:void(0)" class="button small details" aria-expanded="false" aria-controls="details-emeasurematics"><span class="label">View Details</span><span class="chip"><span class="chev icon solid fa-chevron-down"></span></span></a></li>
 						</ul>
 								<ul class="tech-list">
 									<li>Python</li>
