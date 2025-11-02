@@ -69,8 +69,19 @@
 				transform: translateY(0);
 			}
 				#experience .spotlight-details p { margin: 0 0 0.75em 0; }
-				#experience .spotlight .actions a.button .chev { transition: transform 200ms ease; display: inline-block; line-height: 1; }
-				#experience .spotlight .actions a.button[aria-expanded="true"] .chev { transform: rotate(180deg); }
+				#experience .spotlight .actions a.button .chev { 
+					transition: transform 200ms ease; 
+					display: inline-block; 
+					line-height: 1; 
+					will-change: transform;
+					transform: translateZ(0);
+					-webkit-font-smoothing: antialiased;
+					-moz-osx-font-smoothing: grayscale;
+					backface-visibility: hidden;
+				}
+				#experience .spotlight .actions a.button[aria-expanded="true"] .chev { 
+					transform: translateZ(0) rotate(180deg); 
+				}
 				#experience .spotlight .actions a.button .label { vertical-align: middle; }
 				#experience .spotlight .actions a.button.details {
 					display: inline-flex;
