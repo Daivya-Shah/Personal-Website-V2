@@ -205,6 +205,7 @@ export class HeroFX {
 		this.returnProgress = 0;
 		this.spriteBounceCounts = [];
 		this.lastVelocitySigns = [];
+		this.spriteReturnDelays = [];
 		
 		// Store original positions and create velocities
 		this.toolSprites.forEach((sprite, i) => {
@@ -217,6 +218,9 @@ export class HeroFX {
 			this.explodedVelocities[i] = dir.multiplyScalar(speed);
 			this.spriteBounceCounts[i] = 0; // initialize bounce counter
 			this.lastVelocitySigns[i] = { x: 0, y: 0, z: 0 }; // initialize velocity sign tracking
+			
+			// Random delay for staggered return (0 to 1.5 seconds)
+			this.spriteReturnDelays[i] = Math.random() * 1.5;
 		});
 	};
 
@@ -345,25 +349,37 @@ export class HeroFX {
 			} else if (this.explodeState.phase === 'return') {
 				// Return phase: smoothly return to original rotation paths
 				const returnDuration = 2.0;
-				const progress = Math.min(1, (t - this.explodeState.startTime) / returnDuration);
+				const globalProgress = (t - this.explodeState.startTime) / returnDuration;
 				
-				const easeOut = 1 - Math.pow(1 - progress, 3); // cubic ease-out
+				let allComplete = true;
 				
 				for (let i = 0; i < this.toolSprites.length; i++) {
 					const s = this.toolSprites[i];
 					const orig = this.originalPositions[i];
 					
-					// Lerp towards original position
-					s.position.lerp(orig, easeOut);
+					// Calculate individual progress for this sprite based on its delay
+					const spriteProgress = Math.max(0, globalProgress - this.spriteReturnDelays[i] / returnDuration);
+					const clampedProgress = Math.min(1, spriteProgress);
 					
-					if (s.userData && s.userData.label) {
-						const lbl = s.userData.label;
-						lbl.position.set(s.position.x, s.position.y - (lbl.userData.yGap || 3.8), s.position.z);
+					// Only lerp if this sprite has started returning
+					if (spriteProgress > 0) {
+						const easeOut = 1 - Math.pow(1 - clampedProgress, 3); // cubic ease-out
+						s.position.lerp(orig, easeOut);
+						
+						if (s.userData && s.userData.label) {
+							const lbl = s.userData.label;
+							lbl.position.set(s.position.x, s.position.y - (lbl.userData.yGap || 3.8), s.position.z);
+						}
+					}
+					
+					// Track if all sprites have completed their return
+					if (clampedProgress < 1) {
+						allComplete = false;
 					}
 				}
 				
-				// End animation and resume normal rotation
-				if (progress >= 1) {
+				// End animation and resume normal rotation only when all are done
+				if (allComplete) {
 					// Recalculate angle offsets for seamless continuation from current positions
 					const currentTime = this.clock.getElapsedTime();
 					for (let i = 0; i < this.toolSprites.length; i++) {
