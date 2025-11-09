@@ -337,6 +337,8 @@
 			#projects .row > div:nth-child(5) .box { background-color: rgba(255, 255, 255, 0.175); }
 			#projects .row > div:nth-child(6) .box { background-color: rgba(255, 255, 255, 0.21); }
 
+			#projects .project-date { margin: 0.15em 0 0.6em; font-size: 0.95em; font-weight: 600; letter-spacing: 0.02em; opacity: 0.85; }
+			#projects .highlight-title,
 			#projects .older-title { margin: 0.8em 0 0.4em; text-align: center; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.95; font-size: 1.5em; }
 
 			/* Normalize spacing inside project cards */
@@ -602,7 +604,7 @@
 						<div class="inner">
 							<h2>Projects</h2>
 							<ul class="actions special">
-								<li><a href="https://docs.google.com/document/d/1rrwJkGTugg7X9ekwLiRygGzfBrFoMrnK0OtDbdqaaXg/edit?usp=sharing" class="button primary" target="_blank" rel="noopener">View all projects in detail</a></li>
+								<li><a href="https://docs.google.com/document/d/1mNuWdEuJVrS7wYrwa6II0rcTt2ezDHsSg0t240lUejs/edit?usp=sharing" class="button primary" target="_blank" rel="noopener">View all projects in detail</a></li>
 							</ul>
 						</div>
 					</section>
@@ -611,18 +613,23 @@
 					<section id="projects" class="wrapper style1 special">
 						<div class="inner">
 							<div class="row gtr-50 gtr-uniform">
+									<div class="col-12"><h3 class="highlight-title">Highlight Projects</h3></div>
 									<div class="col-6 col-12-medium">
 										<div class="box">
-											<span class="image fit"><img src="images/fitzty.png" alt="Fitzty — AI-Powered Fashion Intelligence" /></span>
-											<h3>Fitzty — AI-Powered Fashion Intelligence</h3>
-											<p>AI-powered fashion platform that digitizes wardrobes, generates outfits, and recommends styles using GPT-4 Vision and DALL-E 3.</p>
+											<span class="image fit"><img src="images/fitzty.png" alt="Fitzty" /></span>
+											<h3>Fitzty</h3>
+											<p class="project-date">Jul 2025 - Aug 2025</p>
+											<p>Fashion intelligence platform that digitizes wardrobes, generates photorealistic outfits, and recommends personalized styles using computer vision, pgvector, and Gemini 2.5 Flash Image.</p>
 									<ul class="tech-list">
-										<li>GPT-4 Vision</li>
-										<li>DALL-E 3</li>
-										<li>LangChain</li>
+										<li>Python</li>
+										<li>JavaScript</li>
+										<li>Gemini 2.5 Flash Image</li>
 										<li>PostgreSQL</li>
 										<li>Supabase</li>
 										<li>Next.js</li>
+										<li>React.js</li>
+										<li>Swift</li>
+										<li>Xcode</li>
 									</ul>
 											<ul class="actions special">
 												<li><a href="https://www.fitzty.com/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
@@ -632,15 +639,18 @@
 									</div>
 									<div class="col-6 col-12-medium">
 										<div class="box">
-											<span class="image fit"><img src="images/assignxchange.png" alt="AssignXchange — AI Deal Intelligence" /></span>
-											<h3>AssignXchange — AI Deal Intelligence</h3>
-											<p>Marketplace connecting real estate wholesalers and investors through intelligent deal matching using GPT-4 embeddings and semantic search.</p>
+											<span class="image fit"><img src="images/assignxchange.png" alt="AssignXchange" /></span>
+											<h3>AssignXchange</h3>
+											<p class="project-date">Apr 2025 - May 2025</p>
+											<p>AI-powered real estate marketplace connecting wholesalers and investors through semantic search, GPT-4 embeddings, and automated deal ranking for smarter property investments.</p>
 								<ul class="tech-list">
-									<li>GPT-4</li>
+									<li>Python</li>
+									<li>TypeScript</li>
 									<li>LangChain</li>
+									<li>GPT-4</li>
 									<li>Firecrawl</li>
 									<li>PostgreSQL</li>
-									<li>Next.js</li>
+									<li>Stripe</li>
 								</ul>
 											<ul class="actions special">
 												<li><a href="https://www.assignxchange.com/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
@@ -650,19 +660,21 @@
 									</div>
 									<div class="col-6 col-12-medium">
 										<div class="box">
-								<span class="image fit"><img src="images/harvest.png" alt="Harvest — Manufacturer Discovery" /></span>
-								<h3>Harvest — Manufacturer Discovery</h3>
-											<p>AI-powered platform helping CPG founders discover verified manufacturers using hybrid semantic search and learning-to-rank.</p>
+								<span class="image fit"><img src="images/harvest.png" alt="Harvest" /></span>
+								<h3>Harvest</h3>
+											<p class="project-date">Feb 2025 - Mar 2025</p>
+											<p>Helps CPG founders find the right manufacturing partners using GPT-4 RAG search, Pinecone vector retrieval, and XGBoost ranking models.</p>
 								<ul class="tech-list">
-									<li>FastAPI</li>
-									<li>GPT-4</li>
-									<li>LangChain</li>
-									<li>scikit-learn</li>
-									<li>XGBoost</li>
-									<li>Pinecone</li>
-									<li>Firebase</li>
-									<li>Selenium</li>
+									<li>Python</li>
 									<li>Ruby</li>
+									<li>FastAPI</li>
+									<li>LangChain</li>
+									<li>Scikit-learn</li>
+									<li>GPT-4</li>
+									<li>Pinecone</li>
+									<li>Selenium</li>
+									<li>Firebase</li>
+									<li>XGBoost Ranker</li>
 								</ul>
 										</div>
 									</div>
@@ -671,14 +683,16 @@
 										<div class="box">
 											<span class="image fit"><img src="images/anywebsupportai.png" alt="AnyWebSupport AI — Site Support Bot" /></span>
 											<h3>AnyWebSupport AI — Site Support Bot</h3>
+											<p class="project-date">Aug 2024 - Sep 2024</p>
 											<p>Real-time, context-based customer support that generates responses directly from a website's content using OpenAI API.</p>
 											<ul class="tech-list">
 												<li>Node.js</li>
 												<li>OpenAI API</li>
 												<li>Cheerio</li>
 												<li>Firebase</li>
-												<li>React</li>
 												<li>Next.js</li>
+												<li>React</li>
+												<li>Material UI</li>
 											</ul>
 											<ul class="actions special">
 												<li><a href="https://any-web-support-ai-customer-service-for-any-website.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
@@ -690,14 +704,15 @@
 										<div class="box">
 											<span class="image fit"><img src="images/quickcardsai.png" alt="QuickCards AI — Flashcard Generator" /></span>
 											<h3>QuickCards AI — Flashcard Generator</h3>
+											<p class="project-date">Aug 2024</p>
 											<p>Automatically creates study flashcards from text input using GPT-4 with Stripe subscriptions and 3D flip animations.</p>
 											<ul class="tech-list">
 												<li>OpenAI API</li>
 												<li>Firebase</li>
 												<li>Clerk</li>
 												<li>Stripe</li>
-												<li>React</li>
 												<li>Next.js</li>
+												<li>React</li>
 											</ul>
 											<ul class="actions special">
 												<li><a href="https://quick-cards-ai-flashcard-gener-git-880dbd-daivya-shahs-projects.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
@@ -709,14 +724,15 @@
 										<div class="box">
 											<span class="image fit"><img src="images/ratemyprofai.png" alt="RateMyProf AI — Professor Reviews" /></span>
 											<h3>RateMyProf AI — Professor Reviews</h3>
+											<p class="project-date">Aug 2024</p>
 											<p>Simplifies exploring and adding professor reviews through AI-powered semantic search with RAG-based retrieval.</p>
 											<ul class="tech-list">
+												<li>Node.js</li>
 												<li>OpenAI API</li>
 												<li>Pinecone</li>
 												<li>Cheerio</li>
-												<li>Node.js</li>
-												<li>React</li>
 												<li>Next.js</li>
+												<li>React</li>
 											</ul>
 											<ul class="actions special">
 												<li><a href="https://rate-my-professor-ai-rate-my-professor.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
@@ -728,12 +744,13 @@
 										<div class="box">
 											<span class="image fit"><img src="images/stocksmartai.png" alt="StockSmart AI — Pantry Tracker" /></span>
 											<h3>StockSmart AI — Pantry Tracker</h3>
+											<p class="project-date">Jul 2024 - Aug 2024</p>
 											<p>Tracks inventory and expiration dates while suggesting recipes based on available items to reduce waste.</p>
 											<ul class="tech-list">
 												<li>OpenAI API</li>
 												<li>Firebase</li>
-												<li>React</li>
 												<li>Next.js</li>
+												<li>React</li>
 											</ul>
 											<ul class="actions special">
 												<li><a href="https://stock-smart-ai-pantry-tracker.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
