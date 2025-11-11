@@ -444,11 +444,16 @@ export class HeroFX {
 		const entries = [];
 		const skillEls = document.querySelectorAll('#skills .skill');
 		skillEls.forEach((el) => {
-			const img = el.querySelector('img[alt]');
+			const img = el.querySelector('img');
 			if (img) {
-				const label = img.getAttribute('alt') || '';
-				entries.push({ slug: mapSpecial(label), label });
-				return;
+				const dataLabel = img.getAttribute('data-icon') || img.getAttribute('data-skill') || img.getAttribute('data-label');
+				const spanLabel = (el.querySelector('span')?.textContent || '').trim();
+				const altLabel = img.getAttribute('alt') || '';
+				const label = (dataLabel && dataLabel.trim()) || spanLabel || altLabel;
+				if (label) {
+					entries.push({ slug: mapSpecial(label), label });
+					return;
+				}
 			}
 			const fa = el.querySelector('.icon');
 			if (fa) {
