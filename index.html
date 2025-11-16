@@ -469,6 +469,84 @@
 			body.is-mobile #contact {
 				background-attachment: scroll;
 			}
+
+			/* Resume request modal */
+			#resume-modal {
+				position: fixed;
+				inset: 0;
+				background: rgba(0, 0, 0, 0.75);
+				display: none;
+				justify-content: center;
+				align-items: center;
+				z-index: 10000;
+			}
+			#resume-modal.active {
+				display: flex;
+			}
+			#resume-modal .modal-content {
+				background: #1b1b1b;
+				border-radius: 8px;
+				padding: 1.5em; /* uniform padding on all sides */
+				max-width: 24em;
+				width: 90%;
+				box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+			}
+			#resume-modal h3 {
+				margin: 0 0 0.5em 0;
+			}
+			#resume-modal p {
+				margin: 0 0 0.9em 0;
+				font-size: 0.95em;
+			}
+			#resume-modal form {
+				display: flex;
+				flex-direction: column;
+				gap: 0.6em;
+				margin: 0; /* remove default form margin */
+			}
+			#resume-modal input[type="email"] {
+				width: 100%;
+				background: rgba(255,255,255,0.08);
+				border: 1px solid rgba(255,255,255,0.35);
+				color: #ffffff;
+				border-radius: 6px;
+				padding: 0.75em 0.9em;
+			}
+			#resume-modal input::placeholder {
+				color: rgba(255,255,255,0.75);
+			}
+			#resume-modal input:focus {
+				outline: none;
+				border-color: #21b2a6;
+				box-shadow: 0 0 0 2px rgba(33,178,166,0.2);
+			}
+			#resume-modal .actions {
+				display: flex;
+				flex-direction: column;
+				align-items: stretch;
+				gap: 0.55em;
+				margin: 0; /* no extra space above or below buttons inside modal */
+				padding: 0;
+			}
+			#resume-modal .actions li {
+				margin: 0;
+				padding: 0;
+			}
+			#resume-modal .actions .button {
+				margin: 0; /* prevent extra bottom gap from button styles */
+			}
+			#resume-modal .actions .button {
+				width: 100%;
+				text-align: center;
+			}
+			#resume-modal .button.secondary {
+				background: transparent;
+				box-shadow: none;
+				border: 1px solid rgba(255,255,255,0.35);
+			}
+			#resume-modal .button.secondary:hover {
+				background: rgba(255,255,255,0.08);
+			}
 		</style>
 	</head>
 	<body class="landing is-preload">
@@ -503,9 +581,9 @@
 						<div class="inner">
 							<h2>Daivya Shah</h2>
 							<p class="tagline">I like building intelligent systems that learn from data and scale beautifully.</p>
-						<ul class="actions special">
+							<ul class="actions special">
 								<li><a href="https://www.linkedin.com/in/daivya-shah/" class="button primary">LinkedIn</a></li>
-								<li><a href="/Files/Daivya_Shah_Resume.pdf" class="button primary" target="_blank" rel="noopener">Resume</a></li>
+								<li><button type="button" class="button primary" id="resume-request-button">Resume</button></li>
 							</ul>
 						</div>
 					</section>
@@ -882,17 +960,16 @@
 					<section id="contact" class="wrapper style4">
 						<div class="inner">
 							<header>
-								<h2>Let's Connect</h2>
+							<h2>Let's Connect</h2>
 								<p>I'm always interested in new opportunities and collaborations.<br />
 								Feel free to reach out to discuss projects or just say hello!</p>
 							</header>
-							<form action="https://formsubmit.co/daivya.shah@stern.nyu.edu" method="POST" class="contact-form">
+							<form action="https://formspree.io/f/xeovllqo" method="POST" class="contact-form">
 								<input type="hidden" name="_subject" value="Portfolio Contact" />
-								<input type="hidden" name="_captcha" value="false" />
-								<input type="hidden" name="_template" value="table" />
 								<input type="text" name="name" placeholder="Your name" required />
 								<input type="email" name="email" placeholder="Your email" required />
-								<input type="text" name="subject" placeholder="Subject" class="full" required />
+								<!-- Use a distinct field name so Formspree reliably includes it in the submission payload -->
+								<input type="text" name="contact_subject" placeholder="Subject (optional)" class="full" />
 								<textarea name="message" placeholder="Your message" rows="6" class="full" required></textarea>
 								<ul class="actions">
 									<li><button type="submit" class="button primary">Send</button></li>
@@ -900,6 +977,22 @@
 							</form>
 						</div>
 					</section>
+
+				<!-- Resume Request Modal -->
+				<div id="resume-modal" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title" aria-hidden="true">
+					<div class="modal-content">
+						<h3 id="resume-modal-title">Request my resume</h3>
+						<p>Enter your email below and I’ll send you my resume directly.</p>
+						<form action="https://formspree.io/f/xzzyavnb" method="POST">
+							<input type="hidden" name="_subject" value="Resume Request from Portfolio" />
+							<input type="email" name="requester_email" placeholder="Your email" required />
+							<ul class="actions">
+								<li><button type="submit" class="button primary">Request Resume</button></li>
+								<li><button type="button" class="button secondary" id="resume-modal-cancel">Cancel</button></li>
+							</ul>
+						</form>
+					</div>
+				</div>
 
 				<!-- Footer -->
 					<footer id="footer">
@@ -1031,6 +1124,55 @@
 					document.addEventListener('keydown', function(e){
 						if (e.key === 'Escape') document.body.classList.remove('is-menu-visible');
 					});
+
+					// Resume request modal behavior
+					var resumeBtn = document.getElementById('resume-request-button');
+					var resumeModal = document.getElementById('resume-modal');
+					var resumeCancel = document.getElementById('resume-modal-cancel');
+
+					if (resumeBtn && resumeModal) {
+						var emailInput = resumeModal.querySelector('input[type="email"]');
+
+						function openResumeModal() {
+							resumeModal.classList.add('active');
+							resumeModal.setAttribute('aria-hidden', 'false');
+							if (emailInput) {
+								setTimeout(function() { emailInput.focus(); }, 50);
+							}
+						}
+
+						function closeResumeModal() {
+							resumeModal.classList.remove('active');
+							resumeModal.setAttribute('aria-hidden', 'true');
+							if (resumeBtn) {
+								resumeBtn.focus();
+							}
+						}
+
+						resumeBtn.addEventListener('click', function() {
+							openResumeModal();
+						});
+
+						if (resumeCancel) {
+							resumeCancel.addEventListener('click', function() {
+								closeResumeModal();
+							});
+						}
+
+						// Close when clicking overlay outside content
+						resumeModal.addEventListener('click', function(e) {
+							if (e.target === resumeModal) {
+								closeResumeModal();
+							}
+						});
+
+						// ESC key also closes modal if open
+						document.addEventListener('keydown', function(e){
+							if (e.key === 'Escape' && resumeModal.classList.contains('active')) {
+								closeResumeModal();
+							}
+						});
+					}
 				})();
 			</script>
 
