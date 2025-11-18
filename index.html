@@ -238,6 +238,7 @@
 		gap: 0.75em !important;
 		flex-wrap: nowrap !important;
 		margin: 0 !important;
+		width: 100% !important;
 	}
 	
 	#banner .actions li,
@@ -247,6 +248,8 @@
 		display: inline-block !important;
 		margin: 0 !important;
 		padding: 0 !important;
+		flex-shrink: 1 !important;
+		min-width: 0 !important;
 	}
 	
 	#banner .actions .button,
@@ -254,9 +257,23 @@
 	#projects-banner .actions .button,
 	#contact .actions .button {
 		font-size: 0.7rem !important;
-		padding: 0 1.5em !important;
+		padding: 0 1.2em !important;
 		white-space: nowrap !important;
 		display: inline-block !important;
+		width: auto !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+	}
+	
+	/* Ensure buttons stay on one line on very small screens */
+	@media screen and (max-width: 480px) {
+		#banner .actions {
+			gap: 0.5em !important;
+		}
+		#banner .actions .button {
+			font-size: 0.65rem !important;
+			padding: 0 1em !important;
+		}
 	}
 	
 	/* Reduce content padding on mobile */
