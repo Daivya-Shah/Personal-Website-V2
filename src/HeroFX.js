@@ -6,8 +6,9 @@ export class HeroFX {
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
 		this.camera.position.z = 70;
-		this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-		this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+		this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+		// Retina phones often use DPR 3; capping at 2 made hero sprites look soft on iOS/Safari
+		this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 3));
 		this.containerEl.appendChild(this.renderer.domElement);
 
 		this.clock = new THREE.Clock();
@@ -25,23 +26,56 @@ export class HeroFX {
 		this.hammerRotation = 0; // current hammer rotation angle
 		this.hammerAnimation = null; // null | { startTime: number, startRotation: number }
 
-		// Prepare SVG loader helper
+		// Rasterize SVGs at high resolution: Simple Icons decode tiny (~24px) by default;
+		// sampling that up for THREE.Sprites is very blurry on iOS Safari WebGL.
+		this._configureSpriteTexture = (tex) => {
+			tex.generateMipmaps = false;
+			tex.minFilter = THREE.LinearFilter;
+			tex.magFilter = THREE.LinearFilter;
+			tex.wrapS = THREE.ClampToEdgeWrapping;
+			tex.wrapT = THREE.ClampToEdgeWrapping;
+			tex.colorSpace = THREE.SRGBColorSpace;
+			tex.needsUpdate = true;
+			return tex;
+		};
+
 		this._loadSvgTexture = async (url) => {
+			const basePx = 256;
 			try {
 				const res = await fetch(url, { mode: 'cors' });
 				if (!res.ok) throw new Error('HTTP ' + res.status);
-				const svgText = await res.text();
+				let svgText = await res.text();
+				if (/<svg[^>]*\swidth=/i.test(svgText)) {
+					svgText = svgText
+						.replace(/\swidth="[^"]*"/i, ` width="${basePx}"`)
+						.replace(/\sheight="[^"]*"/i, ` height="${basePx}"`);
+				} else {
+					svgText = svgText.replace(/<svg\b/i, `<svg width="${basePx}" height="${basePx}" `);
+				}
+
 				const dataUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgText);
-				return await new Promise((resolve) => {
-					const img = new Image();
-					img.crossOrigin = 'anonymous';
-					img.onload = () => {
-						const tex = new THREE.Texture(img);
-						tex.needsUpdate = true;
-						resolve(tex);
-					};
-					img.src = dataUrl;
+				const img = await new Promise((resolve, reject) => {
+					const el = new Image();
+					el.crossOrigin = 'anonymous';
+					el.onload = () => resolve(el);
+					el.onerror = () => reject(new Error('svg image load'));
+					el.src = dataUrl;
 				});
+
+				const pr = Math.min(window.devicePixelRatio || 1, 3);
+				const canvas = document.createElement('canvas');
+				canvas.width = Math.round(basePx * pr);
+				canvas.height = Math.round(basePx * pr);
+				const ctx = canvas.getContext('2d', { alpha: true });
+				if (!ctx) return null;
+				ctx.imageSmoothingEnabled = true;
+				if ('imageSmoothingQuality' in ctx) ctx.imageSmoothingQuality = 'high';
+				ctx.setTransform(pr, 0, 0, pr, 0, 0);
+				ctx.clearRect(0, 0, basePx, basePx);
+				ctx.drawImage(img, 0, 0, basePx, basePx);
+
+				const tex = this._configureSpriteTexture(new THREE.CanvasTexture(canvas));
+				return tex;
 			} catch (e) {
 				return null;
 			}
@@ -489,7 +523,12 @@ export class HeroFX {
 			const url = base + tools[i].slug;
 			const texture = await this._loadSvgTexture(url);
 			if (!texture) return; // skip items without a supported icon
-			const mat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false });
+			const mat = new THREE.SpriteMaterial({
+				map: texture,
+				transparent: true,
+				depthWrite: false,
+				alphaTest: 0.01,
+			});
 			const sprite = new THREE.Sprite(mat);
 			sprite.scale.set(8, 8, 1);
 			const ring = i % 2;
@@ -540,8 +579,7 @@ export class HeroFX {
 		cx.shadowBlur = 8;
 		cx.fillStyle = '#ffffff';
 		cx.fillText(text, tmp.width / 2, tmp.height / 2);
-		const tex = new THREE.CanvasTexture(tmp);
-		tex.needsUpdate = true;
+		const tex = this._configureSpriteTexture(new THREE.CanvasTexture(tmp));
 		return tex;
 	}
 }
