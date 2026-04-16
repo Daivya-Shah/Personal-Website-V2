@@ -9,11 +9,11 @@
 		<title>Daivya Shah</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="description" content="Daivya Shah is a Data Science &amp; Business undergraduate at NYU focused on building AI-driven products, analytics platforms, and full-stack experiences." />
+		<meta name="description" content="Daivya Shah is a Computer Science, Data Science, and Business undergraduate at NYU focused on building AI-driven products, analytics platforms, and full-stack experiences." />
 		<link rel="canonical" href="https://daivyashah.com/" />
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="en_US" />
-		<meta property="og:title" content="Daivya Shah | Data Science &amp; Business at NYU" />
+		<meta property="og:title" content="Daivya Shah | Computer Science, Data Science, and Business at NYU" />
 		<meta property="og:description" content="Discover Daivya Shah’s AI, data, and product work plus professional experience, projects, and ways to connect." />
 		<meta property="og:url" content="https://daivyashah.com/" />
 		<meta property="og:site_name" content="Daivya Shah" />
@@ -22,7 +22,7 @@
 		<meta property="og:image:width" content="1600" />
 		<meta property="og:image:height" content="1600" />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="Daivya Shah | Data Science &amp; Business at NYU" />
+		<meta name="twitter:title" content="Daivya Shah | Computer Science, Data Science, and Business at NYU" />
 		<meta name="twitter:description" content="Discover Daivya Shah’s AI, data, and product work plus professional experience, projects, and ways to connect." />
 		<meta name="twitter:url" content="https://daivyashah.com/" />
 		<meta name="twitter:image" content="https://daivyashah.com/images/me.jpg" />
@@ -39,8 +39,8 @@
 			"name": "Daivya Shah",
 			"url": "https://daivyashah.com/",
 			"image": "https://daivyashah.com/images/me.jpg",
-			"description": "Data Science &amp; Business undergraduate at NYU focused on building AI-driven products, analytics platforms, and full-stack experiences.",
-			"jobTitle": "Data Science &amp; Business Undergraduate",
+			"description": "Computer Science, Data Science, and Business undergraduate at NYU focused on building AI-driven products, analytics platforms, and full-stack experiences.",
+			"jobTitle": "Computer Science, Data Science, and Business Undergraduate",
 			"affiliation": {
 				"@type": "CollegeOrUniversity",
 				"name": "New York University"
@@ -121,6 +121,13 @@
 				transform: translateY(0);
 			}
 				#experience .spotlight-details p { margin: 0 0 0.75em 0; }
+				#experience .spotlight-details .details-content ul.experience-bullets {
+					list-style: disc;
+					margin: 0;
+					padding-left: 1.25em;
+				}
+				#experience .spotlight-details .details-content ul.experience-bullets li { margin: 0 0 0.65em 0; }
+				#experience .spotlight-details .details-content ul.experience-bullets li:last-child { margin-bottom: 0; }
 				#experience .spotlight .actions a.button .chev { transition: transform 200ms ease; display: inline-block; line-height: 1; }
 				#experience .spotlight .actions a.button[aria-expanded="true"] .chev { transform: rotate(180deg); }
 				#experience .spotlight .actions a.button .label { vertical-align: middle; }
@@ -430,12 +437,40 @@
 				gap: 0.8em;
 			}
 			#projects .box:hover { background-color: rgba(255, 255, 255, 0.1); }
-			#projects .row > div:nth-child(1) .box { background-color: rgba(255, 255, 255, 0.035); }
-			#projects .row > div:nth-child(2) .box { background-color: rgba(255, 255, 255, 0.07); }
-			#projects .row > div:nth-child(3) .box { background-color: rgba(255, 255, 255, 0.105); }
-			#projects .row > div:nth-child(4) .box { background-color: rgba(255, 255, 255, 0.14); }
-			#projects .row > div:nth-child(5) .box { background-color: rgba(255, 255, 255, 0.175); }
-			#projects .row > div:nth-child(6) .box { background-color: rgba(255, 255, 255, 0.21); }
+			/* Highlight: Pinterest-style two columns (tall left / stacked right) */
+			#projects .highlight-masonry {
+				display: flex;
+				flex-direction: row;
+				align-items: flex-start;
+				justify-content: center;
+				/* Match .row.gtr-50.gtr-uniform gutter (half of 1.5em base) */
+				gap: 0.75em;
+				width: 100%;
+				max-width: 100%;
+			}
+			#projects .highlight-masonry-col {
+				flex: 1 1 0;
+				min-width: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.75em;
+			}
+			/* Theme .box adds margin-bottom (~2em); stacked + flex gap doubled spacing vs grid rows */
+			#projects .highlight-masonry .box {
+				margin-bottom: 0;
+			}
+			#projects .highlight-masonry .highlight-masonry-col:nth-child(1) .box:nth-child(1) { background-color: rgba(255, 255, 255, 0.06); }
+			#projects .highlight-masonry .highlight-masonry-col:nth-child(1) .box:nth-child(2) { background-color: rgba(255, 255, 255, 0.09); }
+			#projects .highlight-masonry .highlight-masonry-col:nth-child(1) .box:nth-child(3) { background-color: rgba(255, 255, 255, 0.12); }
+			#projects .highlight-masonry .highlight-masonry-col:nth-child(2) .box:nth-child(1) { background-color: rgba(255, 255, 255, 0.075); }
+			#projects .highlight-masonry .highlight-masonry-col:nth-child(2) .box:nth-child(2) { background-color: rgba(255, 255, 255, 0.11); }
+			@media screen and (max-width: 980px) {
+				#projects .highlight-masonry { flex-direction: column; gap: 0.75em; }
+			}
+			/* Older projects: row striping (first col-6 after older title = child 4) */
+			#projects .row > div:nth-child(4) .box { background-color: rgba(255, 255, 255, 0.07); }
+			#projects .row > div:nth-child(5) .box { background-color: rgba(255, 255, 255, 0.105); }
+			#projects .row > div:nth-child(6) .box { background-color: rgba(255, 255, 255, 0.14); }
 
 			#projects .project-date { margin: 0.15em 0 0.6em; font-size: 0.95em; font-weight: 600; letter-spacing: 0.02em; opacity: 0.85; }
 			#projects .highlight-title,
@@ -452,6 +487,7 @@
 			#projects .box .tech-list { justify-content: center; }
 			#projects .box .tech-list li { background: rgba(33, 178, 166, 0.2); border: 1.5px solid rgba(255, 255, 255, 0.5); color: #ffffff; padding: 0.35em 0.6em; border-radius: 999px; font-size: 0.8em; line-height: 1; white-space: nowrap; }
 			#projects .box .tech-list li:hover { background: rgba(33, 178, 166, 0.3); border-color: rgba(255, 255, 255, 0.8); }
+			#projects .vision2voice-images .image.fit + .image.fit { margin-top: 0.65em; display: block; }
 			#projects .box .actions { display: flex; justify-content: center; width: 100%; gap: 0.5em; }
 			#projects .box .actions li { padding: 0 !important; }
 			#projects .box .actions .icon {
@@ -650,7 +686,7 @@
 								<img src="images/nyu_logo.png" alt="Daivya Shah" />
 							</div>
 							<ul class="facts">
-							<li><span class="icon solid fa-graduation-cap"></span><span><span class="highlight">Data Science & Business</span> undergrad at <span class="highlight">NYU</span>, graduating <span class="highlight">May 2026</span></span></li>
+							<li><span class="icon solid fa-graduation-cap"></span><span><span class="highlight">Computer Science, Data Science, and Business</span> undergrad at <span class="highlight">NYU</span>, graduating <span class="highlight">May 2026</span></span></li>
 							<li><span class="icon solid fa-map-marker-alt"></span><span>Based in <span class="highlight">New York, NY</span></span></li>
 						<li><span class="icon solid fa-users"></span><span><span class="highlight">Vice President</span> of the <span class="highlight">NYU Machine Learning Club</span> with <span class="highlight">1,100+</span> members</span></li>
 								<li><span class="icon solid fa-guitar"></span><span>I enjoy playing poker, traveling, watching Formula 1, playing tennis, and jamming on the guitar</span></li>
@@ -690,8 +726,11 @@
 					<div id="details-newmark" class="spotlight-details" role="region" aria-hidden="true" aria-label="Newmark details">
 						<div class="details-inner">
 							<div class="details-content">
-								<p>At Newmark, I worked on several web applications used by brokers and research teams to manage real estate data and deals. One of my main projects was a Commercial Real Estate stacking plan that visualized tenant and vacancy data floor by floor. I built it with React and TypeScript, adding filters, interactive layouts, and color-coded lease expirations to make portfolio insights easier to interpret.</p>
-								<p>I also developed a time-based activity feed that merged notes, tours, proposals, and deal events into one view, using React Query to handle live data updates and caching. Later, I built a Kanban-style deal pipeline with drag-and-drop deal tracking, inline editing, and dynamic columns to help brokers organize their workflows. Toward the end of my internship, I designed a responsive GIS landing page with Tailwind CSS that showcased site selection services through modular components and integrated form submissions. Working across these projects helped me strengthen my understanding of scalable component design, state management, and how small UI changes can meaningfully improve daily workflows.</p>
+								<ul class="experience-bullets">
+									<li>Automated CapEx/OpEx forecasting for goal planning by building an internal OKR platform with Golang microservices and FastAPI on Kubernetes (EKS), using gRPC for inter-service communication and surfacing $120K+ in projected annual labor cost savings</li>
+									<li>Built a Real Estate Stacking Plan by standardizing 10K+ leasing records in Databricks using Spark and Delta Lake, enabling 300+ brokers to visualize floor-by-floor occupancy via a Redis-cached React/TypeScript interface, reducing query latency by 30%</li>
+									<li>Engineered a data ingestion pipeline with Playwright, Apache Kafka, and LangChain to extract and standardize data from 70K+ property listing URLs through multi-path scraping and LLM-based schema mapping, producing structured JSON for search and analytics</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -744,7 +783,11 @@
 					<div id="details-everise" class="spotlight-details" role="region" aria-hidden="true" aria-label="Everise details">
 						<div class="details-inner">
 							<div class="details-content">
-								<p>At Everise, I worked on automating data workflows and improving how performance metrics were tracked. I built ETL pipelines using Python, SQL, and Apache Airflow to combine data from different client systems into a central warehouse. Once the data was integrated, I created Power BI dashboards with DAX to visualize key metrics like Bill-to-Pay percentage and service-level performance. Debugging inconsistencies across different data sources was difficult, but it helped me learn how to manage reliability in production data systems. I also developed and deployed a Go-based forecasting API that used ARIMA and LightGBM to predict client-level Bill-to-Pay rates with around 90% accuracy. This experience gave me a clearer understanding of data engineering processes and how automation improves business reporting.</p>
+								<ul class="experience-bullets">
+									<li>Developed a streaming pipeline to ingest customer call transcripts from Five9 into Snowflake using AWS Kinesis and Glue, enabling EverAI's NLP QA scoring models to automatically audit 78% of a healthcare client's 50K+ monthly calls, up from 12% manual review</li>
+									<li>Extended the AWS Glue ingestion pipeline in Python with Protected Health Information (PHI) detection, automatically scanning and redacting 18 HIPAA identifier categories before loading to Snowflake, achieving zero compliance violations</li>
+									<li>Built an XGBoost workforce demand forecasting model in Python using features engineered with dbt in Snowflake from Workday HCM and call detail records, reducing staffing error (MAPE) by 11% and cutting WFM planners' manual reporting by 5+ hours weekly</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -771,7 +814,10 @@
 					<div id="details-emeasurematics" class="spotlight-details" role="region" aria-hidden="true" aria-label="eMeasurematics details">
 						<div class="details-inner">
 							<div class="details-content">
-								<p>At eMeasurematics, I worked on predictive maintenance software for industrial vehicles in steel facilities. I helped develop a Flask-based system that used SQLAlchemy, MySQL, and ensemble models such as Random Forest and XGBoost to predict maintenance needs from sensor data. Cleaning inconsistent readings and tuning models for stable performance was one of the harder parts of the project. I also created a Tableau dashboard to monitor machine performance and configured radar sensor firmware used in crane positioning systems. The experience taught me how to apply machine learning to real operational problems and how reliable data collection directly affects the accuracy of predictive models.</p>
+								<ul class="experience-bullets">
+									<li>Fine-tuned a YOLOv8 computer vision model for object detection on 3,000+ labeled crane camera images for 2 underperforming classes via mosaic augmentation and class-weighted loss, improving mAP@0.5 by 0.23 and misclassification rate from 22% to 5%</li>
+									<li>Built an anomaly detection pipeline on 2.4M+ crane PLC records across 14 sensor channels using Isolation Forest and LSTM Autoencoder (scikit-learn, PyTorch), detecting 11 failure-risk anomalies from 6 weeks of historical sensor data with 91% precision</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -792,68 +838,104 @@
 						<div class="inner">
 							<div class="row gtr-50 gtr-uniform">
 									<div class="col-12"><h3 class="highlight-title">Highlight Projects</h3></div>
-									<div class="col-6 col-12-medium">
-										<div class="box">
-											<span class="image fit"><img src="images/fitzty.png" alt="Daivya Shah" /></span>
-											<h3>Fitzty</h3>
-											<p class="project-date">Jul 2025 - Aug 2025</p>
-											<p>Fashion intelligence platform that digitizes wardrobes, generates photorealistic outfits, and recommends personalized styles using computer vision, pgvector, and Gemini 2.5 Flash Image.</p>
-									<ul class="tech-list">
-										<li>Python</li>
-										<li>JavaScript</li>
-										<li>Gemini 2.5 Flash Image</li>
-										<li>PostgreSQL</li>
-										<li>Supabase</li>
-										<li>Next.js</li>
-										<li>React.js</li>
-										<li>Swift</li>
-										<li>Xcode</li>
-									</ul>
-											<ul class="actions special">
-												<li><a href="https://www.fitzty.com/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
-												<li><a href="https://github.com/Daivya-Shah/Fitzty.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-6 col-12-medium">
-										<div class="box">
-											<span class="image fit"><img src="images/assignxchange.png" alt="Daivya Shah" /></span>
-											<h3>AssignXchange</h3>
-											<p class="project-date">Apr 2025 - May 2025</p>
-											<p>AI-powered real estate marketplace connecting wholesalers and investors through semantic search, GPT-4 embeddings, and automated deal ranking for smarter property investments.</p>
-								<ul class="tech-list">
-									<li>Python</li>
-									<li>TypeScript</li>
-									<li>LangChain</li>
-									<li>GPT-4</li>
-									<li>Firecrawl</li>
-									<li>PostgreSQL</li>
-									<li>Stripe</li>
-								</ul>
-											<ul class="actions special">
-												<li><a href="https://www.assignxchange.com/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
-												<li><a href="https://github.com/Daivya-Shah/AssignXchange.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-6 col-12-medium">
-										<div class="box">
-								<span class="image fit"><img src="images/harvest.png" alt="Daivya Shah" /></span>
-								<h3>Harvest</h3>
-											<p class="project-date">Feb 2025 - Mar 2025</p>
-											<p>Helps CPG founders find the right manufacturing partners using GPT-4 RAG search, Pinecone vector retrieval, and XGBoost ranking models.</p>
-								<ul class="tech-list">
-									<li>Python</li>
-									<li>Ruby</li>
-									<li>FastAPI</li>
-									<li>LangChain</li>
-									<li>Scikit-learn</li>
-									<li>GPT-4</li>
-									<li>Pinecone</li>
-									<li>Selenium</li>
-									<li>Firebase</li>
-									<li>XGBoost Ranker</li>
-								</ul>
+									<div class="col-12">
+										<div class="highlight-masonry">
+											<div class="highlight-masonry-col">
+												<div class="box">
+													<div class="vision2voice-images">
+														<span class="image fit"><img src="images/vision2voice-1.png" alt="Vision2Voice: live NBA clip with event detection and visual summary" /></span>
+														<span class="image fit"><img src="images/vision2voice-2.png" alt="Vision2Voice: player and team stats with generated commentary" /></span>
+													</div>
+													<h3>Vision2Voice</h3>
+													<p class="project-date">2025</p>
+													<p>Add commentary, detect players, and events (assists, three-pointers, and more) live on NBA games.</p>
+													<ul class="tech-list">
+														<li>TypeScript</li>
+														<li>Python</li>
+														<li>FastAPI</li>
+														<li>OpenCV</li>
+														<li>OpenAI API</li>
+														<li>Supabase</li>
+														<li>Vite</li>
+													</ul>
+													<ul class="actions special">
+														<li><a href="https://github.com/Daivya-Shah/Add-commentary-to-live-NBA-games" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
+													</ul>
+												</div>
+												<div class="box">
+													<h3>Convers AI</h3>
+													<p class="project-date">2025</p>
+													<p>Convers AI is a Next.js app for authenticated, context-aware AI conversations, letting users upload PDFs, retrieve relevant knowledge via Pinecone embeddings, and generate study tools like flashcards from chats.</p>
+													<ul class="tech-list">
+														<li>Next.js</li>
+														<li>TypeScript</li>
+														<li>Pinecone</li>
+														<li>OpenAI API</li>
+														<li>Tailwind CSS</li>
+													</ul>
+													<ul class="actions special">
+														<li><a href="https://github.com/Daivya-Shah/Convers-AI" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
+													</ul>
+												</div>
+												<div class="box">
+													<span class="image fit"><img src="images/harvest.png" alt="Daivya Shah" /></span>
+													<h3>Harvest</h3>
+													<p class="project-date">Feb 2025 - Mar 2025</p>
+													<p>Helps CPG founders find the right manufacturing partners using GPT-4 RAG search, Pinecone vector retrieval, and XGBoost ranking models.</p>
+													<ul class="tech-list">
+														<li>Python</li>
+														<li>Ruby</li>
+														<li>FastAPI</li>
+														<li>LangChain</li>
+														<li>Scikit-learn</li>
+														<li>GPT-4</li>
+														<li>Pinecone</li>
+														<li>Selenium</li>
+														<li>Firebase</li>
+														<li>XGBoost Ranker</li>
+													</ul>
+												</div>
+											</div>
+											<div class="highlight-masonry-col">
+												<div class="box">
+													<span class="image fit"><img src="images/fitzty.png" alt="Daivya Shah" /></span>
+													<h3>Fitzty</h3>
+													<p class="project-date">Jul 2025 - Aug 2025</p>
+													<p>Fashion intelligence platform that digitizes wardrobes, generates photorealistic outfits, and recommends personalized styles using computer vision, pgvector, and Gemini 2.5 Flash Image.</p>
+													<ul class="tech-list">
+														<li>Python</li>
+														<li>JavaScript</li>
+														<li>Gemini 2.5 Flash Image</li>
+														<li>PostgreSQL</li>
+														<li>Supabase</li>
+														<li>Next.js</li>
+														<li>React.js</li>
+														<li>Swift</li>
+														<li>Xcode</li>
+													</ul>
+													<ul class="actions special">
+														<li><a href="https://github.com/Daivya-Shah/Fitzty.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
+													</ul>
+												</div>
+												<div class="box">
+													<span class="image fit"><img src="images/assignxchange.png" alt="Daivya Shah" /></span>
+													<h3>AssignXchange</h3>
+													<p class="project-date">Apr 2025 - May 2025</p>
+													<p>AI-powered real estate marketplace connecting wholesalers and investors through semantic search, GPT-4 embeddings, and automated deal ranking for smarter property investments.</p>
+													<ul class="tech-list">
+														<li>Python</li>
+														<li>TypeScript</li>
+														<li>LangChain</li>
+														<li>GPT-4</li>
+														<li>Firecrawl</li>
+														<li>PostgreSQL</li>
+														<li>Stripe</li>
+													</ul>
+													<ul class="actions special">
+														<li><a href="https://github.com/Daivya-Shah/AssignXchange.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
+													</ul>
+												</div>
+											</div>
 										</div>
 									</div>
 						<div class="col-12"><h3 class="older-title">Older Projects</h3></div>
@@ -873,7 +955,6 @@
 												<li>Material UI</li>
 											</ul>
 											<ul class="actions special">
-												<li><a href="https://any-web-support-ai-customer-service-for-any-website.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
 												<li><a href="https://github.com/Daivya-Shah/AnyWebSupport-AI-Customer-Service-for-Any-Website.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
 											</ul>
 										</div>
@@ -893,7 +974,6 @@
 												<li>React</li>
 											</ul>
 											<ul class="actions special">
-												<li><a href="https://quick-cards-ai-flashcard-gener-git-880dbd-daivya-shahs-projects.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
 												<li><a href="https://github.com/Daivya-Shah/QuickCards-AI-Flashcard-Generator.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
 											</ul>
 										</div>
@@ -913,26 +993,7 @@
 												<li>React</li>
 											</ul>
 											<ul class="actions special">
-												<li><a href="https://rate-my-professor-ai-rate-my-professor.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
 												<li><a href="https://github.com/Daivya-Shah/RateMyProfessor-AI-Professor-Reviews.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-6 col-12-medium">
-										<div class="box">
-											<span class="image fit"><img src="images/stocksmartai.png" alt="Daivya Shah" /></span>
-											<h3>StockSmart AI — Pantry Tracker</h3>
-											<p class="project-date">Jul 2024 - Aug 2024</p>
-											<p>Tracks inventory and expiration dates while suggesting recipes based on available items to reduce waste.</p>
-											<ul class="tech-list">
-												<li>OpenAI API</li>
-												<li>Firebase</li>
-												<li>Next.js</li>
-												<li>React</li>
-											</ul>
-											<ul class="actions special">
-												<li><a href="https://stock-smart-ai-pantry-tracker.vercel.app/" class="icon solid fa-external-link-alt" target="_blank" rel="noopener" title="Live Application"><span class="label">Live App</span></a></li>
-												<li><a href="https://github.com/Daivya-Shah/StockSmart-AI-Pantry-Tracker.git" class="icon brands fa-github" target="_blank" rel="noopener" title="View on GitHub"><span class="label">GitHub</span></a></li>
 											</ul>
 										</div>
 									</div>
